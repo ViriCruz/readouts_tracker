@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  day: 2020-05-12
+  total_time: 2020-05-12 18:34:39
+  category: one
+
+two:
+  day: 2020-05-12
+  total_time: 2020-05-12 18:34:39
+  category: two

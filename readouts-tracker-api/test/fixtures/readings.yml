@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyText
+  duration: 2020-05-12 18:33:08
+  initial_date: 2020-05-12 18:33:08
+  user: one
+  category: one
+
+two:
+  description: MyText
+  duration: 2020-05-12 18:33:08
+  initial_date: 2020-05-12 18:33:08
+  user: two
+  category: two
