@@ -10,5 +10,4 @@ RSpec.describe Reading, type: :model do
   # ensure columns description, duration and created_at are present before saving
   it { should validate_presence_of(:description) }
   it { should validate_presence_of(:duration) }
-  it { should validate_presence_of(:created_at) }
 end
