@@ -1,11 +1,11 @@
 class Api::V1::ReadingsController < ApplicationController
+  before_action :set_user
+  before_action :set_category
   before_action :set_reading, only: [:show, :update, :destroy]
 
   # GET /readings
   def index
-    @readings = Reading.all
-
-    render json: @readings
+    render json: @category.readings
   end
 
   # GET /readings/1
@@ -15,37 +15,40 @@ class Api::V1::ReadingsController < ApplicationController
 
   # POST /readings
   def create
-    @reading = Reading.new(reading_params)
+    @reading = @user.readings.create!(reading_params) 
+    @reading.category_id = @category.id
 
-    if @reading.save
-      render json: @reading, status: :created, location: api_v1_readings_url(@reading)
-    else
-      render json: @reading.errors, status: :unprocessable_entity
-    end
+    json_response(@category, :created)
   end
 
   # PATCH/PUT /readings/1
   def update
-    if @reading.update(reading_params)
-      render json: @reading
-    else
-      render json: @reading.errors, status: :unprocessable_entity
-    end
+    @reading.update(reading_params)
+    json_response(@reading)
   end
 
   # DELETE /readings/1
   def destroy
     @reading.destroy
+    head :no_content
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_category
+      @category = Category.find(params[:category_id])
+    end
+
+    def set_user
+      @user = User.find(params[:user_id])
+    end
+
     def set_reading
-      @reading = Reading.find(params[:id])
+      @reading = @category.readings.find_by!(id: params[:id]) if @category
     end
 
     # Only allow a trusted parameter "white list" through.
     def reading_params
-      params.require(:reading).permit(:description, :duration, :initial_date, :user_id, :category_id)
+      params.permit(:description, :duration, :user_id, :category_id)
     end
 end
