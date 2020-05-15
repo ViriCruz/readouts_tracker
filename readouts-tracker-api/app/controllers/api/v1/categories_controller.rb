@@ -5,23 +5,23 @@ class Api::V1::CategoriesController < ApplicationController
   def index
     @categories = Category.all
 
-    render json: @categories
+    # render :index
+    json_response(:index)
   end
 
   # GET /categories/1
   def show
-    render json: @category
+    # render :show
+    return json_response(@category) if @category.nil?
+    
+    json_response(:show)
   end
 
   # POST /categories
   def create
-    @category = Category.new(category_params)
+    @category = Category.create!(category_params)
 
-    if @category.save
-      render json: @category, status: :created, location: api_v1_categories_url(@category)
-    else
-      render json: @category.errors, status: :unprocessable_entity
-    end
+    json_response(@category, :created)
   end
 
   # PATCH/PUT /categories/1
