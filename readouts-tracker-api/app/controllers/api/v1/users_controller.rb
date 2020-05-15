@@ -5,12 +5,16 @@ class Api::V1::UsersController < ApplicationController
   def index
     @users = User.all
 
-    render json: @users
+    # render :index
+    json_response(:index)
   end
 
   # GET /users/1
   def show
-    render json: @user
+    # render json: @user
+    return json_response(@user) if @user.nil?
+    
+    json_response(:show)
   end
 
   # POST /users
