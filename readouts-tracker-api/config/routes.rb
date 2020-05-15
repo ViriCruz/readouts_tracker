@@ -2,9 +2,12 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :measurements
-      resources :readings
-      resources :categories
-      resources :users
+      resources :categories, only: [:index]
+      resources :users do
+        resources :categories do
+          resources :readings    
+        end
+      end
     end
   end
   
