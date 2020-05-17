@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :reading do
     description { Faker::Lorem.word }
-    duration { Faker::Time.backward(days: 5, period: :morning, format: :short) }
+    hours { Faker::Number.number(digits: 2) }
+    minutes { Faker::Number.number(digits: 2) }
   end
 end

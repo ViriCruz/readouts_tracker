@@ -1,6 +1,7 @@
 class Api::V1::MeasurementsController < ApplicationController
   before_action :set_measurement, only: [:show, :update, :destroy]
-  before_action :set_category
+  before_action :set_category, if: :category_param?
+
   # GET /measurements
   def index
     @measurements = current_user.measurements
@@ -16,6 +17,7 @@ class Api::V1::MeasurementsController < ApplicationController
   # POST /measurements
   def create
     @measurement = current_user.measurements.create!(measurement_params)
+    
     @measurement.category_id = @category.id
     json_response(@measurement, :created)
   end
@@ -40,12 +42,16 @@ class Api::V1::MeasurementsController < ApplicationController
       @measurement = Measurement.find(params[:id])
     end
 
+    def category_param?
+      params.has_key?(:category_id)
+    end
+
     def set_category
-      @category = Category.find(params[:id]) if params.has_key?(:category_id)
+      @category = Category.find(params[:category_id])   
     end
 
     # Only allow a trusted parameter "white list" through.
     def measurement_params
-      params.require(:measurement).permit(:day, :total_time)
+      params.permit(:day, :total_time, :category_id)
     end
 end

@@ -66,7 +66,7 @@ RSpec.describe 'Readings API' do
 
   # Test suite for POST /api/v1/users/:user_id/categories/:category_id/readings/
   describe 'POST /api/v1/categories/:category_id/readings/' do
-    let(:valid_attributes) { { description: 'Reading Narnia', duration: "2020-05-15T01:18:11.171Z" }.to_json }
+    let(:valid_attributes) { { description: 'Reading Narnia', hours: 3, minutes: 40 }.to_json }
     
     context 'when request attributes are valid' do
       before { 
@@ -92,7 +92,7 @@ RSpec.describe 'Readings API' do
       end
 
       it 'returns a failure message' do
-        expect(response.body).to match(/Validation failed: Description can't be blank, Duration can't be blank/)
+        expect(response.body).to match(/Validation failed: Description can't be blank, Hours can't be blank, Minutes can't be blank/)
       end
     end
   end

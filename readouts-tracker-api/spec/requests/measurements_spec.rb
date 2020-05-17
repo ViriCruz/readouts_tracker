@@ -28,7 +28,7 @@ RSpec.describe 'Measurements API', type: :request do
   end
 
   describe 'POST api/v1/categories/:category_id/measurements' do
-    let(:valid_attributes) { { description: 'Reading Narnia', duration: "2020-05-15T01:18:11.171Z" }.to_json }
+    let(:valid_attributes) { { day: Faker::Date.forward(days: 2), total_time: "02:35" }.to_json }
     
     context 'when request attributes are valid' do
       before { 
@@ -38,6 +38,7 @@ RSpec.describe 'Measurements API', type: :request do
       }
 
       it 'returns status code 201' do
+        print response
         expect(response).to have_http_status(201)
       end
     end

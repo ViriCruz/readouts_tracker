@@ -45,6 +45,6 @@ class Api::V1::ReadingsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def reading_params
-      params.permit(:description, :duration, :category_id)
+      params.permit(:description, :hours, :minutes, :category_id)
     end
 end
