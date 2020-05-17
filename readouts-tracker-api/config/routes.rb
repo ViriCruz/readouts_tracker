@@ -1,15 +1,18 @@
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :measurements
       resources :categories, only: [:index]
-      resources :users do
-        resources :categories do
-          resources :readings    
-        end
+      resources :measurements, only: [:index]
+      resources :categories do
+        resources :measurements
+        resources :readings    
       end
+      # resources :users, only: [:create] do
+        
+      # end
     end
   end
-  
+  post 'auth/login', to: 'authentication#authenticate'
+  post 'signup', to: 'api/v1/users#create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
