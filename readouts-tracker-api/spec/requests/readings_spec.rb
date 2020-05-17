@@ -66,7 +66,7 @@ RSpec.describe 'Readings API' do
 
   # Test suite for POST /api/v1/users/:user_id/categories/:category_id/readings/
   describe 'POST /api/v1/categories/:category_id/readings/' do
-    let(:valid_attributes) { { description: 'Reading Narnia', hours: 3, minutes: 40 }.to_json }
+    let(:valid_attributes) { { description: 'Reading Narnia', hours: 3, minutes: 40 , day: Faker::Date.between(from: 2.days.ago, to: Date.today) }.to_json }
     
     context 'when request attributes are valid' do
       before { 
