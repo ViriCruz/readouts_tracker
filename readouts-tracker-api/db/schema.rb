@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_013439) do
+ActiveRecord::Schema.define(version: 2020_05_16_225216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,17 +23,18 @@ ActiveRecord::Schema.define(version: 2020_05_13_013439) do
 
   create_table "measurements", force: :cascade do |t|
     t.date "day"
-    t.time "total_time"
+    t.string "total_time"
     t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
     t.index ["category_id"], name: "index_measurements_on_category_id"
+    t.index ["user_id"], name: "index_measurements_on_user_id"
   end
 
   create_table "readings", force: :cascade do |t|
     t.text "description"
     t.time "duration"
-    t.datetime "initial_date"
     t.bigint "user_id", null: false
     t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -48,9 +49,11 @@ ActiveRecord::Schema.define(version: 2020_05_13_013439) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password_digest"
   end
 
   add_foreign_key "measurements", "categories"
+  add_foreign_key "measurements", "users"
   add_foreign_key "readings", "categories"
   add_foreign_key "readings", "users"
 end
