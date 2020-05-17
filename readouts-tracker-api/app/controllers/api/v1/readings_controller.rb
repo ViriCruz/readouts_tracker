@@ -1,11 +1,11 @@
 class Api::V1::ReadingsController < ApplicationController
-  before_action :set_user
   before_action :set_category
   before_action :set_reading, only: [:show, :update, :destroy]
 
   # GET /readings
   def index
-    render json: @category.readings
+    @readings = Reading.where("category_id = ? AND user_id = ?", params[:category_id], current_user.id)
+    render json: @readings
   end
 
   # GET /readings/1
@@ -15,10 +15,10 @@ class Api::V1::ReadingsController < ApplicationController
 
   # POST /readings
   def create
-    @reading = @user.readings.create!(reading_params) 
+    @reading = current_user.readings.create!(reading_params) 
     @reading.category_id = @category.id
 
-    json_response(@category, :created)
+    json_response(@reading, :created)
   end
 
   # PATCH/PUT /readings/1
@@ -38,17 +38,13 @@ class Api::V1::ReadingsController < ApplicationController
     def set_category
       @category = Category.find(params[:category_id])
     end
-
-    def set_user
-      @user = User.find(params[:user_id])
-    end
-
+    
     def set_reading
       @reading = @category.readings.find_by!(id: params[:id]) if @category
     end
 
     # Only allow a trusted parameter "white list" through.
     def reading_params
-      params.permit(:description, :duration, :user_id, :category_id)
+      params.permit(:description, :duration, :category_id)
     end
 end
