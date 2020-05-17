@@ -6,12 +6,12 @@ RSpec.describe 'Readings API' do
   let!(:user) { create(:user) }
   let!(:readings) { create_list(:reading, 20, category_id: category.id, user_id: user.id) }
   let(:category_id) { category.id }
-  let(:user_id) { user.id }
   let(:id) { readings.first.id }
+  let(:headers) { valid_headers }
 
-  # Test suite for GET /api/v1/users/:user_id/categories/:category_id/readings
-  describe 'GET /api/v1/users/:user_id/categories/:category_id/readings' do
-    before { get "/api/v1/users/#{user_id}/categories/#{category_id}/readings" }
+  # Test suite for GET /api/v1/categories/:category_id/readings
+  describe 'GET /api/v1/categories/:category_id/readings' do
+    before { get "/api/v1/categories/#{category_id}/readings", params: {}, headers: headers }
 
     context 'when category and user exists' do
       it 'returns status code 200' do
@@ -35,24 +35,11 @@ RSpec.describe 'Readings API' do
         expect(response.body).to match(/Couldn't find Category/)
       end
     end
-
-    context 'when user does not exist' do
-      let(:user_id) { 0 }
-
-      it 'returns status code 404' do
-        print response.body
-        expect(response).to have_http_status(404)
-      end
-
-      it 'returns a not found message' do
-        expect(response.body).to match(/Couldn't find User/)
-      end
-    end
   end
 
   # Test suite for GET /api/v1/users/:user_id/categories/:category_id/readings/:reading_id
-  describe 'GET /api/v1/users/:user_id/categories/:category_id/readings/:reading_id' do
-    before { get "/api/v1/users/#{user_id}/categories/#{category_id}/readings/#{id}" }
+  describe 'GET /api/v1/categories/:category_id/readings/:reading_id' do
+    before { get "/api/v1/categories/#{category_id}/readings/#{id}", params: {}, headers: headers }
 
     context 'when reading exists' do
       it 'returns status code 200' do
@@ -64,7 +51,7 @@ RSpec.describe 'Readings API' do
       end
     end
 
-    context 'when todo item does not exist' do
+    context 'when reading does not exist' do
       let(:id) { 0 }
 
       it 'returns status code 404' do
@@ -78,12 +65,15 @@ RSpec.describe 'Readings API' do
   end
 
   # Test suite for POST /api/v1/users/:user_id/categories/:category_id/readings/
-  describe 'POST /api/v1/users/:user_id/categories/:category_id/readings/' do
-    let(:valid_attributes) { { description: 'Reading Narnia', duration: "2020-05-15T01:18:11.171Z" } }
-    print :valid_attributes
-
+  describe 'POST /api/v1/categories/:category_id/readings/' do
+    let(:valid_attributes) { { description: 'Reading Narnia', duration: "2020-05-15T01:18:11.171Z" }.to_json }
+    
     context 'when request attributes are valid' do
-      before { post "/api/v1/users/#{user_id}/categories/#{category_id}/readings/", params: valid_attributes }
+      before { 
+        post "/api/v1/categories/#{category_id}/readings/", 
+        params: valid_attributes,
+        headers: headers 
+      }
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
@@ -91,7 +81,11 @@ RSpec.describe 'Readings API' do
     end
 
     context 'when an invalid request' do
-      before { post "/api/v1/users/#{user_id}/categories/#{category_id}/readings/", params: {} }
+      before { 
+        post "/api/v1/categories/#{category_id}/readings/", 
+        params: {},
+        headers: headers
+      }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -104,10 +98,14 @@ RSpec.describe 'Readings API' do
   end
 
   # Test suite for PUT /api/v1/users/:user_id/categories/:category_id/readings/:reading_id
-  describe 'PUT /api/v1/users/:user_id/categories/:category_id/readings/:reading_id' do
-    let(:valid_attributes) { { description: 'Reading Mozart Biography' } }
+  describe 'PUT /api/v1/categories/:category_id/readings/:reading_id' do
+    let(:valid_attributes) { { description: 'Reading Mozart Biography' }.to_json }
 
-    before { put "/api/v1/users/#{user_id}/categories/#{category_id}/readings/#{id}", params: valid_attributes }
+    before do 
+      put "/api/v1/categories/#{category_id}/readings/#{id}", 
+      params: valid_attributes,
+      headers: headers
+    end
 
     context 'when item exists' do
       it 'returns status code 200' do
@@ -134,8 +132,12 @@ RSpec.describe 'Readings API' do
   end
 
   # Test suite for DELETE /todos/:id
-  describe 'DELETE /api/v1/users/:user_id/categories/:category_id/readings/:reading_id' do
-    before { delete "/api/v1/users/#{user_id}/categories/#{category_id}/readings/#{id}" }
+  describe 'DELETE /api/v1/categories/:category_id/readings/:reading_id' do
+    before { 
+      delete "/api/v1/categories/#{category_id}/readings/#{id}",
+      params: {},
+      headers: headers
+    }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
