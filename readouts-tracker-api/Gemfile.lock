@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: https://github.com/rspec/rspec-rails.git
-  revision: 59ae53157e9f85ae662c4610fd428b86af7628af
+  revision: d33432a8fac8c3d2352f34988f702979ea2e4ef5
   branch: master
   specs:
     rspec-rails (4.1.0.pre)
@@ -106,6 +106,7 @@ GEM
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.0)
+    bcrypt (3.1.13)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
     builder (3.2.4)
@@ -139,6 +140,7 @@ GEM
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
+    jwt (2.2.1)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -238,6 +240,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
   capybara
@@ -246,6 +249,7 @@ DEPENDENCIES
   faker
   figaro
   jbuilder (~> 2.7)
+  jwt
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
