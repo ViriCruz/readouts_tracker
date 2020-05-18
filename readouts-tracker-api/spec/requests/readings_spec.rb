@@ -46,6 +46,7 @@ RSpec.describe 'Readings API' do
       end
 
       it 'returns total time of especific category' do
+
         expect(json['data']['total_time']).not_to be_empty
       end
     end

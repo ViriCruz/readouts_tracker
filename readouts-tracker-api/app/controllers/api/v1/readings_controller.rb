@@ -14,12 +14,11 @@ class Api::V1::ReadingsController < ApplicationController
   end
 
   def total_time
-    @total_time = format_time
     json = {
       :data => {
         :total_time => {
           :category => @category.name,
-          :total_time => @total_time,
+          :total_time => format_time,
           :date => Date.today
         }
       }
@@ -79,10 +78,21 @@ class Api::V1::ReadingsController < ApplicationController
       get_original_minutes.first[1] >= 60
     end
 
+    def get_total_hours
+      get_original_hours.first[1] + convert_minutes_to_hours
+    end
+
     def format_time
-      hours = get_original_hours.first[1] + convert_minutes_to_hours #sum this to total hours
+      hours = get_total_hours #sum this to total hours
       rest = get_original_minutes.first[1] % 60
-      return "#{hours}:#{rest}"
+      
+      format_hours = is_lower_than_ten?(hours) ? "0#{hours}" : "#{hours}"
+      format_minutes = is_lower_than_ten?(rest) ? "0#{rest}" : "#{rest}"
+      return "#{format_hours}:#{format_minutes}"
+    end
+
+    def is_lower_than_ten?(number)
+      number >= 0 && number <= 9
     end
     # Only allow a trusted parameter "white list" through.
     def reading_params
