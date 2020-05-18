@@ -8,9 +8,9 @@ linters:
 # add the files here you want to be ignored by stylelint
 files:
   ignore:
-    - "**/db/**/*"
+    - "**/db/*"
     - "**/bin/*" 
-    - "**/config/**/*"
+    - "**/config/*"
     - "**/Guardfile"
     - "**/Rakefile"
     - "**/README.md"

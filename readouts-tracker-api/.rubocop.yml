@@ -8,7 +8,7 @@ AllCops:
     - "README.md"
     - "Gemfile"
     - "node_modules/**/*"
-    - "config/"
+    - "config/**/*"
     - "db/"
   DisplayCopNames: true
 
