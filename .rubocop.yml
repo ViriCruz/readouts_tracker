@@ -9,6 +9,7 @@ AllCops:
     - "**/node_modules/**/*"
     - "**/Gemfile"
     - "**/Gemfile.lock"
+    -"**/config/application.rb"
 
   DisplayCopNames: true
 
