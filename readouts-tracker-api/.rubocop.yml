@@ -1,15 +1,13 @@
 AllCops:
   Exclude:
-    - "**/db/**/*"
-    - "**/bin/*" 
-    - "**/config/**/*"
-    - "**/Guardfile"
-    - "**/Rakefile"
-    - "**/README.md"
-    - "**/node_modules/**/*"
-    - "**/Gemfile"
-    - "**/Gemfile.lock"
-   
+    - "db/**/*"
+    - "bin/*" 
+    - "config/**/*"
+    - "Guardfile"
+    - "Rakefile"
+    - "README.md"
+    - "node_modules/**/*"
+
   DisplayCopNames: true
 
 Layout/LineLength:
