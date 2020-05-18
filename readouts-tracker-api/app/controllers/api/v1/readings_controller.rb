@@ -1,10 +1,10 @@
 class Api::V1::ReadingsController < ApplicationController
   before_action :set_category
-  before_action :set_reading, only: [:show, :update, :destroy]
+  before_action :set_reading, only: %i[show update destroy]
 
   # GET /readings
   def index
-    @readings = Reading.where("category_id = ? AND user_id = ?", params[:category_id], current_user.id)
+    @readings = Reading.where('category_id = ? AND user_id = ?', params[:category_id], current_user.id)
     json_response(@readings)
   end
 
@@ -15,11 +15,11 @@ class Api::V1::ReadingsController < ApplicationController
 
   def total_time
     json = {
-      :data => {
-        :total_time => {
-          :category => @category.name,
-          :total_time => format_time,
-          :date => Date.today
+      data: {
+        total_time: {
+          category: @category.name,
+          total_time: format_time,
+          date: Date.today
         }
       }
     }
@@ -28,7 +28,7 @@ class Api::V1::ReadingsController < ApplicationController
 
   # POST /readings
   def create
-    @reading = current_user.readings.create!(reading_params) 
+    @reading = current_user.readings.create!(reading_params)
     @reading.category_id = @category.id
 
     json_response(@reading, :created)
@@ -47,55 +47,57 @@ class Api::V1::ReadingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = Category.find(params[:category_id])
-    end
-    
-    def set_reading
-      @reading = @category.readings.find_by!(id: params[:id]) if @category
-    end
 
-    def get_original_hours
-      current_user
+  # Use callbacks to share common setup or constraints between actions.
+  def set_category
+    @category = Category.find(params[:category_id])
+  end
+
+  def set_reading
+    @reading = @category.readings.find_by!(id: params[:id]) if @category
+  end
+
+  def original_hours
+    current_user
       .readings
       .filter_by_category_and_day(@category.id)
-      .sum_hours 
-    end
+      .sum_hours
+  end
 
-    def get_original_minutes
-      current_user
+  def original_minutes
+    current_user
       .readings
       .filter_by_category_and_day(@category.id)
-      .sum_minutes 
-    end
+      .sum_minutes
+  end
 
-    def convert_minutes_to_hours
-      get_original_minutes.first[1] / 60 if is_greater_than_sixty?
-    end
+  def convert_minutes_to_hours
+    original_minutes.first[1] / 60 if greater_than_sixty?
+  end
 
-    def is_greater_than_sixty?
-      get_original_minutes.first[1] >= 60
-    end
+  def greater_than_sixty?
+    original_minutes.first[1] >= 60
+  end
 
-    def get_total_hours
-      get_original_hours.first[1] + convert_minutes_to_hours
-    end
+  def total_hours
+    original_hours.first[1] + convert_minutes_to_hours
+  end
 
-    def format_time
-      hours = get_total_hours #sum this to total hours
-      rest = get_original_minutes.first[1] % 60
-      
-      format_hours = is_lower_than_ten?(hours) ? "0#{hours}" : "#{hours}"
-      format_minutes = is_lower_than_ten?(rest) ? "0#{rest}" : "#{rest}"
-      return "#{format_hours}:#{format_minutes}"
-    end
+  def format_time
+    hours = total_hours # sum this to total hours
+    rest = original_minutes.first[1] % 60
 
-    def is_lower_than_ten?(number)
-      number >= 0 && number <= 9
-    end
-    # Only allow a trusted parameter "white list" through.
-    def reading_params
-      params.permit(:description, :hours, :minutes, :day, :category_id)
-    end
+    format_hours = lower_than_ten?(hours) ? "0#{hours}" : hours.to_s
+    format_minutes = lower_than_ten?(rest) ? "0#{rest}" : rest.to_s
+    "#{format_hours}:#{format_minutes}"
+  end
+
+  def lower_than_ten?(number)
+    number >= 0 && number <= 9
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def reading_params
+    params.permit(:description, :hours, :minutes, :day, :category_id)
+  end
 end

@@ -8,14 +8,12 @@ class ApplicationController < ActionController::API
   protected
 
   def category_param?
-    params.has_key?(:category_id)
+    params.key?(:category_id)
   end
 
   private
 
   def authorize_request
-    @current_user = (AuthorizeApiRequest.new(request.headers).call)[:user]
+    @current_user = AuthorizeApiRequest.new(request.headers).call[:user]
   end
-
-  
 end

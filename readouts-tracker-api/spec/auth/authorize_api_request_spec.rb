@@ -4,7 +4,7 @@ RSpec.describe AuthorizeApiRequest do
   # Create test user
   let(:user) { create(:user) }
   # Mock `Authorization` header
- 
+
   let(:header) { { 'Authorization' => token_generator(user.id) } }
   # Invalid request subject
   subject(:invalid_request_obj) { described_class.new({}) }
@@ -24,7 +24,7 @@ RSpec.describe AuthorizeApiRequest do
     end
 
     # returns error message when invalid request
-    context 'when invalid request' do
+    context 'when invalid request #first_scenario' do
       context 'when missing token' do
         it 'raises a MissingToken error' do
           expect { invalid_request_obj.call }
@@ -34,7 +34,6 @@ RSpec.describe AuthorizeApiRequest do
 
       context 'when invalid token' do
         subject(:invalid_request_obj) do
-          # custom helper method `token_generator`
           described_class.new('Authorization' => token_generator(5))
         end
 
@@ -43,7 +42,9 @@ RSpec.describe AuthorizeApiRequest do
             .to raise_error(ExceptionHandler::InvalidToken, /Invalid token/)
         end
       end
+    end
 
+    context 'when invalid request #second_scenario' do
       context 'when token is expired' do
         let(:header) { { 'Authorization' => expired_token_generator(user.id) } }
         subject(:request_obj) { described_class.new(header) }

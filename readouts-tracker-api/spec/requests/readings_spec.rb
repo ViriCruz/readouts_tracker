@@ -46,7 +46,6 @@ RSpec.describe 'Readings API' do
       end
 
       it 'returns total time of especific category' do
-
         expect(json['data']['total_time']).not_to be_empty
       end
     end
@@ -54,14 +53,21 @@ RSpec.describe 'Readings API' do
 
   # Test suite for POST /api/v1/users/:user_id/categories/:category_id/readings/
   describe 'POST /api/v1/categories/:category_id/readings/' do
-    let(:valid_attributes) { { description: 'Reading Narnia', hours: 3, minutes: 40 , day: Faker::Date.between(from: 2.days.ago, to: Date.today) }.to_json }
-    
+    let(:valid_attributes) do
+      {
+        description: 'Reading Narnia',
+        hours: 3,
+        minutes: 40,
+        day: Faker::Date.between(from: 2.days.ago, to: Date.today)
+      }.to_json
+    end
+
     context 'when request attributes are valid' do
-      before { 
-        post "/api/v1/categories/#{category_id}/readings/", 
-        params: valid_attributes,
-        headers: headers 
-      }
+      before do
+        post "/api/v1/categories/#{category_id}/readings/",
+             params: valid_attributes,
+             headers: headers
+      end
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
@@ -69,18 +75,20 @@ RSpec.describe 'Readings API' do
     end
 
     context 'when an invalid request' do
-      before { 
-        post "/api/v1/categories/#{category_id}/readings/", 
-        params: {},
-        headers: headers
-      }
+      before do
+        post "/api/v1/categories/#{category_id}/readings/",
+             params: {},
+             headers: headers
+      end
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
       end
 
       it 'returns a failure message' do
-        expect(response.body).to match(/Validation failed: Description can't be blank, Hours can't be blank, Minutes can't be blank/)
+        expect(response.body).to match("Validation failed: Description can't be blank," \
+          " Hours can't be blank," \
+          " Minutes can't be blank")
       end
     end
   end
@@ -89,10 +97,10 @@ RSpec.describe 'Readings API' do
   describe 'PUT /api/v1/categories/:category_id/readings/:reading_id' do
     let(:valid_attributes) { { description: 'Reading Mozart Biography' }.to_json }
 
-    before do 
-      put "/api/v1/categories/#{category_id}/readings/#{id}", 
-      params: valid_attributes,
-      headers: headers
+    before do
+      put "/api/v1/categories/#{category_id}/readings/#{id}",
+          params: valid_attributes,
+          headers: headers
     end
 
     context 'when item exists' do
@@ -121,11 +129,11 @@ RSpec.describe 'Readings API' do
 
   # Test suite for DELETE /todos/:id
   describe 'DELETE /api/v1/categories/:category_id/readings/:reading_id' do
-    before { 
+    before do
       delete "/api/v1/categories/#{category_id}/readings/#{id}",
-      params: {},
-      headers: headers
-    }
+             params: {},
+             headers: headers
+    end
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

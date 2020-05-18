@@ -4,7 +4,7 @@ require 'database_cleaner'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -40,7 +40,6 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
-
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -64,7 +63,7 @@ RSpec.configure do |config|
       example.run
     end
   end
-  
+
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 

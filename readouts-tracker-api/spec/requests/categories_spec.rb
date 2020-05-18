@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Categories API', type: :request do
   let(:user) { create(:user) }
-  let!(:categories){ create_list(:category, 5) }
-  let(:category_id){ categories.first.id }
-  let(:headers) { valid_headers } 
+  let!(:categories) { create_list(:category, 5) }
+  let(:category_id) { categories.first.id }
+  let(:headers) { valid_headers }
 
   # Test suite for GET /categories
 
@@ -30,6 +30,4 @@ RSpec.describe 'Categories API', type: :request do
       expect(json['categories'].first).not_to have_key('id')
     end
   end
-
-  
 end
