@@ -42,9 +42,9 @@ class Api::V1::MeasurementsController < ApplicationController
       @measurement = Measurement.find(params[:id])
     end
 
-    def category_param?
-      params.has_key?(:category_id)
-    end
+    # def category_param?
+    #   params.has_key?(:category_id)
+    # end
 
     def set_category
       @category = Category.find(params[:category_id])   

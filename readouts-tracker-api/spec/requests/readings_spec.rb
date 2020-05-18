@@ -37,29 +37,16 @@ RSpec.describe 'Readings API' do
     end
   end
 
-  # Test suite for GET /api/v1/users/:user_id/categories/:category_id/readings/:reading_id
-  describe 'GET /api/v1/categories/:category_id/readings/:reading_id' do
-    before { get "/api/v1/categories/#{category_id}/readings/#{id}", params: {}, headers: headers }
+  describe 'GET /api/v1/categories/:category_id/readings/total_time' do
+    before { get "/api/v1/categories/#{category_id}/readings/total_time", params: {}, headers: headers }
 
-    context 'when reading exists' do
+    context 'when category exists' do
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
       end
 
-      it 'returns the reading' do
-        expect(json['id']).to eq(id)
-      end
-    end
-
-    context 'when reading does not exist' do
-      let(:id) { 0 }
-
-      it 'returns status code 404' do
-        expect(response).to have_http_status(404)
-      end
-
-      it 'returns a not found message' do
-        expect(response.body).to match(/Couldn't find Reading/)
+      it 'returns total time of especific category' do
+        expect(json['data']['total_time']).not_to be_empty
       end
     end
   end

@@ -5,14 +5,12 @@ Rails.application.routes.draw do
       resources :measurements, only: [:index]
       resources :categories do
         resources :measurements
-        resources :readings    
+        resources :readings, only: [:index, :create, :update, :destroy]    
       end
-      # resources :users, only: [:create] do
-        
-      # end
     end
   end
   post 'auth/login', to: 'authentication#authenticate'
   post 'signup', to: 'api/v1/users#create'
+  get "api/v1/categories/:category_id/readings/total_time", to: 'api/v1/readings#total_time', as: 'total_time'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
