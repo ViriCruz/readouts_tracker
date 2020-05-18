@@ -8,13 +8,15 @@ linters:
 # add the files here you want to be ignored by stylelint
 files:
   ignore:
-    - "bin/*"
-    - "db/*"
-    - "config/*"
-    - "Guardfile"
-    - "Rakefile"
-    - "README.md"
-    - "node_modules/**/*"
+    - "**/db/**/*"
+    - "**/bin/*" 
+    - "**/config/**/*"
+    - "**/Guardfile"
+    - "**/Rakefile"
+    - "**/README.md"
+    - "**/node_modules/**/*"
+    - "**/Gemfile"
+    - "**/Gemfile.lock"
 
 # PLEASE DO NOT enable auto fixing options
 # if you need extra support from you linter - do it in your local env as described in README for this config
