@@ -8,8 +8,8 @@ AllCops:
     - "README.md"
     - "Gemfile"
     - "node_modules/**/*"
-    - "config/**/*"
-    - "db/"
+    - "config/application.rb"
+    - "db/*"
   DisplayCopNames: true
 
 Layout/LineLength:
