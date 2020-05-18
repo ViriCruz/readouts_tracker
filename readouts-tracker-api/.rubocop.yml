@@ -6,8 +6,10 @@ AllCops:
     - "Guardfile"
     - "Rakefile"
     - "README.md"
+    - "Gemfile"
     - "node_modules/**/*"
-
+    - "config/"
+    - "db/"
   DisplayCopNames: true
 
 Layout/LineLength:
