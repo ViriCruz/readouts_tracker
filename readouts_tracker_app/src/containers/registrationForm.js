@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom'
 import User from '../api/registerUser'
 import { getUser, getUserPending, getUserError } from '../reducers/userReducer';
 
@@ -46,9 +47,6 @@ class RegistrationForm extends React.Component {
         password_confirmation: password_confirmation
       }
     }
-    console.log(
-     data
-    );
 
     register(data)
 
@@ -63,6 +61,9 @@ class RegistrationForm extends React.Component {
 
 
   render () {
+    const { user } = this.props
+    const { data } = user
+    if(data.auth_token) return <Redirect to='/' />
     return (
       <div className="vh-100 d-flex flex-column align-items-center justify-content-center">
         <div className="d-flex justify-content-center">
