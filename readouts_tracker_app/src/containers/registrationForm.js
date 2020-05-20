@@ -1,5 +1,21 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import User from '../api/registerUser'
+import { getUser, getUserPending, getUserError } from '../reducers/userReducer';
 
+const mapDispatchToProps = dispatch => bindActionCreators({
+  register: User.registerUser,
+}, dispatch);
+
+const mapStateToProps = state => ({
+  user: {
+    error: getUserError(state.user),
+    data: getUser(state.user),
+    pending: getUserPending(state.user)
+  }
+})
 
 class RegistrationForm extends React.Component {
   constructor(props) {
@@ -20,13 +36,22 @@ class RegistrationForm extends React.Component {
 
   handleSubmit(event) {
     const { firstName, lastName, email, password, password_confirmation } = this.state;
+    const { register } = this.props;
+    const data = {
+      user: {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        password: password,
+        password_confirmation: password_confirmation
+      }
+    }
     console.log(
-      firstName,
-      lastName,
-      email,
-      password,
-      password_confirmation
+     data
     );
+
+    register(data)
+
     event.preventDefault();
   }
 
@@ -118,4 +143,4 @@ class RegistrationForm extends React.Component {
   }
 }
 
-export default RegistrationForm
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);
