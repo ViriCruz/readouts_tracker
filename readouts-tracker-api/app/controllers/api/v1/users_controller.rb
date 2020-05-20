@@ -4,7 +4,9 @@ class Api::V1::UsersController < ApplicationController
   def create
     user = User.create!(user_params)
     auth_token = AuthenticateUser.new(user.email, user.password).call
+    print('auth token: ', auth_token)
     response = { message: Message.account_created, auth_token: auth_token }
+    print('response: ', response)
     json_response(response.to_json, :created)
   end
 
