@@ -3,27 +3,27 @@ require 'rails_helper'
 RSpec.describe 'Users API', type: :request do
   let(:user) { build(:user) }
   let(:headers) { valid_headers.except('Authorization') }
-  
-  let(:valid_attributes) { 
+
+  let(:valid_attributes) do
     {
-      user: { 
+      user: {
         first_name: user.first_name,
         last_name: user.last_name,
         email: user.email,
         password: user.password,
-        password_confirmation: user.password_confirmation 
+        password_confirmation: user.password_confirmation
       }
-    }.to_json 
-  }
+    }.to_json
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     {
       user: {
         first_name: ''
       }
     }.to_json
-  }
-  
+  end
+
   # User signup test suite
   describe 'POST /signup' do
     context 'when valid request' do
@@ -43,7 +43,6 @@ RSpec.describe 'Users API', type: :request do
     end
 
     context 'when invalid request' do
-      
       before { post '/signup', params: invalid_attributes, headers: headers }
 
       it 'does not create a new user' do

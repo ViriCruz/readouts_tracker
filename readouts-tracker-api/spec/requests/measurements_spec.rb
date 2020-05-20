@@ -37,7 +37,6 @@ RSpec.describe 'Measurements API', type: :request do
       end
 
       it 'returns status code 201' do
-        print response
         expect(response).to have_http_status(201)
       end
     end

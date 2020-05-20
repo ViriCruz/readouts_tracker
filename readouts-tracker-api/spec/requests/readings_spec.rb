@@ -27,7 +27,6 @@ RSpec.describe 'Readings API' do
       let(:category_id) { 0 }
 
       it 'returns status code 404' do
-        print response.body
         expect(response).to have_http_status(404)
       end
 

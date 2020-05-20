@@ -2,7 +2,6 @@ class Api::V1::CategoriesController < ApplicationController
   # GET /categories
   def index
     @categories = Category.all
-
     # render :index
     json_response(:index)
   end
