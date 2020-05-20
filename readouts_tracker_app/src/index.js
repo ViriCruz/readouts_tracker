@@ -12,7 +12,7 @@ const middlewares = [thunk];
 
 const initialState = {
   pending: true,
-  data: [],
+  data: {},
   error: null,
 };
 
