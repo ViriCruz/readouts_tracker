@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import StopWatch from './stopWatch';
 
 const TrackReading = () => {
   const [disabled, setDisabled] = useState('');
@@ -15,6 +16,9 @@ const TrackReading = () => {
 
   return(
     <div className="vh-100">
+      <div className="h-25 d-flex justify-content-center align-items-center">
+        <StopWatch />
+      </div>
       <form className="d-flex justify-content-between">
         <div className="form-group col-sm-12">
           <input 

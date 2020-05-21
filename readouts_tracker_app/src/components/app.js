@@ -3,12 +3,15 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RegistrationForm from '../containers/registrationForm';
 import CategoriesList from '../containers/categoriesList'
 import LoginForm from '../containers/loginForm';
+import Navbar from '../components/navbar'
+import TrackReading from './trackReading';
 
 class App extends React.Component {
   render(){
     return(
-      <div className="app">
-        <Router>
+      <Router>
+        <div className="app">
+          <Navbar />   
           <Switch>
             <Route 
               exact
@@ -16,16 +19,23 @@ class App extends React.Component {
               component={RegistrationForm}
             />
             <Route 
+              exact
               path={'/'}
               component={CategoriesList}
             />
-            <Route 
+            <Route
+              exact 
               path={'/signin'}
               component={LoginForm}
             />
+            <Route 
+              exact
+              path={'/track_reading'}
+              component={TrackReading}
+            />
           </Switch>
-        </Router>
-      </div>
+        </div>
+      </Router>
     )
   }
 }
