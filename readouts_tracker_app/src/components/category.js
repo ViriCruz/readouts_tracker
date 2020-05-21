@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Category = () => (
-  <div>
-    <p>Books</p>
+const Category = ({ name, onClick }) => (
+  <div className="border" onClick={ ev => onClick(ev) }>
+    <p>{ name }</p>
   </div>
 )
 
