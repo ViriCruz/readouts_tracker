@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RegistrationForm from '../containers/registrationForm';
-import Category from './category';
+import CategoriesList from '../containers/categoriesList'
+import LoginForm from '../containers/loginForm';
 
 class App extends React.Component {
   render(){
@@ -16,7 +17,11 @@ class App extends React.Component {
             />
             <Route 
               path={'/'}
-              component={Category}
+              component={CategoriesList}
+            />
+            <Route 
+              path={'/signin'}
+              component={LoginForm}
             />
           </Switch>
         </Router>
