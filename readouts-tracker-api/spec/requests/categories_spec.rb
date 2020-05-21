@@ -25,9 +25,5 @@ RSpec.describe 'Categories API', type: :request do
     it 'contains :name key in category object' do
       expect(json['categories'].first).to have_key('name')
     end
-
-    it 'does not contains :id key in category object' do
-      expect(json['categories'].first).not_to have_key('id')
-    end
   end
 end

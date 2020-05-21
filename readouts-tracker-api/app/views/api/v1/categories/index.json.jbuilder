@@ -1,2 +1,2 @@
 json.ignore_nil!
-json.categories @categories, :name
+json.categories @categories, :id, :name
