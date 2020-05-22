@@ -2,14 +2,18 @@ import React from 'react';
 import Category from '../components/category';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import categories from '../api/fetchCategories' 
+import categories from '../api/fetchCategories';
+import setCategory from '../components/category/setCategory'
 import { getUser } from '../reducers/userReducer';
 import { Redirect } from 'react-router-dom'
-import { getCategories, getCategoriesPending, getCategoriesError } from '../reducers/categoryReducer';
+import { getCategories, getCategoriesPending, getCategoriesError } from '../reducers/categoriesReducer';
+import { getCategory } from '../reducers/categoryReducer'
 import Spinner from 'react-bootstrap/Spinner';
+
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   fetchCategories: categories.fetchCategories,
+  assignCategory: setCategory.category
 }, dispatch);
 
 const mapStateToProps = state => ({
@@ -20,10 +24,19 @@ const mapStateToProps = state => ({
     pending: getCategoriesPending(state.categories),
     data: getCategories(state.categories),
     error: getCategoriesError(state.categories)
-  }
+  },
+  category: getCategory(state.category)
 })
 
 class Categories extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      redirect: false
+    }
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   componentDidMount(){
     const { fetchCategories, user } = this.props
     const { auth_token } = user.data
@@ -33,13 +46,22 @@ class Categories extends React.Component {
 
   handleClick(event){
     event.preventDefault();
-    console.log(event.target.textContent)
+    const {categories, assignCategory} = this.props
+    const { data } = categories
+    const category = data.categories.filter(cat => cat.name === event.target.textContent)
+    assignCategory(category[0])
+    this.setState({
+      redirect: true
+    })
   }
 
   render(){
     const { categories } = this.props
     const { data, pending, error } = categories
+    const { redirect } = this.state
 
+
+    if(redirect) return <Redirect to="/track_reading" />
     
     if (pending){
       return (
@@ -59,6 +81,7 @@ class Categories extends React.Component {
         </div>
       )
     }
+
     
   }
 }

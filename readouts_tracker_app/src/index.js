@@ -20,7 +20,8 @@ const store = createStore(rootReducer, {
   user: initialState,
   categories: initialState,
   readings: initialState,
-  measurements: initialState
+  measurements: initialState,
+  category: {}
 }, applyMiddleware(...middlewares));
 
 ReactDOM.render(

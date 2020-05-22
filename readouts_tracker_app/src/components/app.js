@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RegistrationForm from '../containers/registrationForm';
 import CategoriesList from '../containers/categoriesList'
 import LoginForm from '../containers/loginForm';
-import Navbar from '../components/navbar'
-import TrackReading from './trackReading';
+import Navbar from '../components/navbar';
+import readingContainer from '../containers/readingContainer';
 
 class App extends React.Component {
   render(){
@@ -31,7 +31,7 @@ class App extends React.Component {
             <Route 
               exact
               path={'/track_reading'}
-              component={TrackReading}
+              component={readingContainer}
             />
           </Switch>
         </div>

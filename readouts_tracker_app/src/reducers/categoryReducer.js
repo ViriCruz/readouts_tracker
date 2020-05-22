@@ -1,33 +1,18 @@
 import {
-  FETCH_CATEGORIES_PENDING,
-  FETCH_CATEGORIES_SUCCESS,
-  FETCH_CATEGORIES_ERROR,
+  SET_CATEGORY
 } from '../actions/index'
 
-export const categoriesReducer = (state = {}, action) => {
-  switch(action.type) {
-    case FETCH_CATEGORIES_PENDING:
+export const categoryReducer = (state = {}, action) => {
+  switch (action.type) {
+    case SET_CATEGORY:
       return {
         ...state,
-        pending: true,
+        category: action.category
       }
-    case FETCH_CATEGORIES_SUCCESS:
-      return {
-        ...state,
-        pending: false,
-        data: action.data
-      }
-    case FETCH_CATEGORIES_ERROR:
-      return {
-        ...state,
-        pending: false,
-        error: action.error,
-      }
+  
     default:
-      return state      
+      return state
   }
 }
 
-export const getCategories = state => state.data
-export const getCategoriesPending = state => state.pending
-export const getCategoriesError = state => state.error
+export const getCategory = state => state.category

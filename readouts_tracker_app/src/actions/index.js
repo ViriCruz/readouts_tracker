@@ -1,6 +1,3 @@
-
-
-
 // users
 const FETCH_USER_PENDING = 'FETCH_USER_PENDING';
 const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
@@ -17,6 +14,9 @@ const FETCH_READINGS_ERROR = 'FETCH_READINGS_ERROR';
 const FETCH_MEASUREMENTS_PENDING = 'FETCH_MEASUREMENTS_PENDING';
 const FETCH_MEASUREMENTS_SUCCESS = 'FETCH_MEASUREMENTS_SUCCESS';
 const FETCH_MEASUREMENTS_ERROR = 'FETCH_MEASUREMENTS_ERROR';
+
+// single category
+const SET_CATEGORY = 'SET_CATEGORY'
 
 
 const fetchUserPending = () => ({
@@ -75,6 +75,11 @@ const fetchMeasurementsError = error => ({
   error,
 });
 
+const setCategory = category => ({
+  type: SET_CATEGORY,
+  category
+})
+
 
 
 export {
@@ -90,6 +95,7 @@ export {
   FETCH_MEASUREMENTS_PENDING,
   FETCH_MEASUREMENTS_SUCCESS,
   FETCH_MEASUREMENTS_ERROR,
+  SET_CATEGORY,
   fetchUserPending,
   fetchUserSuccess,
   fetchUserError,
@@ -101,5 +107,6 @@ export {
   fetchReadingsError,
   fetchMeasurementsPending,
   fetchMeasurementsSuccess,
-  fetchMeasurementsError
+  fetchMeasurementsError,
+  setCategory
 };
