@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 class LoginForm extends React.Component {
 
@@ -56,10 +57,13 @@ class LoginForm extends React.Component {
             />
           </div>
 
-          <div className="form-group row">
-            <div className="col-sm-10">
+          <div className="form-group row d-flex justify-content-center">
+            <div className="mx-auto">
               <button type="submit" className="btn btn-primary">Sign In</button>
             </div>
+            <div className="text-muted">
+              <span className="small">Don't have an account?</span> <Link to='/signup' className="small">Register here.</Link>
+          </div>
           </div>
           
         </form>
