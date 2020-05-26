@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import RegistrationForm from '../containers/registrationForm';
 import CategoriesList from '../containers/categoriesList'
 import LoginForm from '../containers/loginForm';
-import Navbar from '../components/navbar';
+import Navbar from '../containers/navbar'
 import readingContainer from '../containers/readingContainer';
 
 class App extends React.Component {
@@ -11,7 +11,7 @@ class App extends React.Component {
     return(
       <Router>
         <div className="app">
-          <Navbar />   
+          <Navbar /> 
           <Switch>
             <Route
               exact
