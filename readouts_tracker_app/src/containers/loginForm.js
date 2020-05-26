@@ -1,12 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
-import Signin from '../api/loginUser'
+import { Link, Redirect } from 'react-router-dom'
+import Auth from '../api/loginUser'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { getUser, getUserPending, getUserError } from '../reducers/userReducer';
+import Spinner from 'react-bootstrap/Spinner';
+import Button from 'react-bootstrap/Button'
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  signin_user: Signin,
+  signin_user: Auth.signin,
 }, dispatch);
 
 const mapStateToProps = state => ({
@@ -24,8 +26,7 @@ class LoginForm extends React.Component {
     super(props)
     this.state = {
       email: "",
-      password: "",
-      loginErrors: ""
+      password: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -53,8 +54,33 @@ class LoginForm extends React.Component {
   }
 
   render() {
+    const { user } = this.props
+    const { pending, error, data } = user
+    if(data.auth_token || localStorage.getItem('__token__')) return <Redirect to='/categories' />
+    if(pending){
+      return (
+        <div className="d-flex align-items-center justify-content-center">
+          <Button variant="primary" disabled>
+            <Spinner
+              as="span"
+              animation="border"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />
+            Loading...
+          </Button>
+        </div>
+      )
+    }
     return (
       <div className="vh-100 d-flex flex-column align-items-center justify-content-center">
+        <div 
+          className={`alert alert-danger ${error ? "d-block":"d-none"}`}
+          role="alert"
+        >
+          {error ? error : ''}
+        </div>
         <div className="d-flex justify-content-center">
           <h1 className="h3">Login to readouts</h1>
         </div>
