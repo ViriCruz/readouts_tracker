@@ -63,7 +63,7 @@ class RegistrationForm extends React.Component {
   render () {
     const { user } = this.props
     const { data } = user
-    if(data.auth_token) return <Redirect to='/' />
+    if(data.auth_token) return <Redirect to='/categories' />
     return (
       <div className="vh-100 d-flex flex-column align-items-center justify-content-center">
         <div className="d-flex justify-content-center">
