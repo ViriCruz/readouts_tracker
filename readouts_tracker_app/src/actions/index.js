@@ -2,6 +2,7 @@
 const FETCH_USER_PENDING = 'FETCH_USER_PENDING';
 const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
 const FETCH_USER_ERROR = 'FETCH_USER_ERROR';
+const NOT_LOGGED_IN = 'NOT_LOGGED_IN'
 // categories
 const FETCH_CATEGORIES_PENDING = 'FETCH_CATEGORIES_PENDING';
 const FETCH_CATEGORIES_SUCCESS = 'FETCH_CATEGORIES_SUCCESS';
@@ -32,6 +33,11 @@ const fetchUserError = error => ({
   type: FETCH_USER_ERROR,
   error,
 });
+
+const userSignOut = data => ({
+  type: NOT_LOGGED_IN,
+  data
+})
 
 const fetchCategoriesPending = () => ({
   type: FETCH_CATEGORIES_PENDING,
@@ -96,6 +102,7 @@ export {
   FETCH_MEASUREMENTS_SUCCESS,
   FETCH_MEASUREMENTS_ERROR,
   SET_CATEGORY,
+  NOT_LOGGED_IN,
   fetchUserPending,
   fetchUserSuccess,
   fetchUserError,
@@ -108,5 +115,6 @@ export {
   fetchMeasurementsPending,
   fetchMeasurementsSuccess,
   fetchMeasurementsError,
-  setCategory
+  setCategory,
+  userSignOut
 };
