@@ -21,7 +21,7 @@ export const usersReducer = (state = {}, action) => {
       return {
         ...state,
         pending: false,
-        error: action.error,
+        error: action.error.message,
       }
     default:
       return state      
