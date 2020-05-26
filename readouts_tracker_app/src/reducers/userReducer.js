@@ -29,7 +29,8 @@ export const usersReducer = (state = {}, action) => {
       console.log('signed out')
       return {
         ...state,
-        data: action.data
+        data: action.data,
+        pending: false
       }
     default:
       return state      
