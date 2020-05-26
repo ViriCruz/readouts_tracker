@@ -1,5 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import Signin from '../api/loginUser'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { getUser, getUserPending, getUserError } from '../reducers/userReducer';
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  signin_user: Signin,
+}, dispatch);
+
+const mapStateToProps = state => ({
+    user: {
+      error: getUserError(state.user),
+      data: getUser(state.user),
+      pending: getUserPending(state.user)
+    }
+  }
+)
 
 class LoginForm extends React.Component {
 
@@ -17,10 +34,22 @@ class LoginForm extends React.Component {
 
   handleSubmit(event){
     event.preventDefault();
+    const { email, password } = this.state
+    const { signin_user } = this.props
+    const data = {
+      email: email,
+      password: password
+    }
+    signin_user(data)
+    // send to api login
+
   }
 
   handleChange(event){
     event.preventDefault();
+    this.setState({
+      [event.target.name]: event.target.value
+    })
   }
 
   render() {
@@ -72,4 +101,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
