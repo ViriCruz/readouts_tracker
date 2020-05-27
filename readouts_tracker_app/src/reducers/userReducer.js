@@ -2,6 +2,7 @@ import {
   FETCH_USER_PENDING,
   FETCH_USER_SUCCESS,
   FETCH_USER_ERROR,
+  NOT_LOGGED_IN
 } from '../actions/index'
 
 export const usersReducer = (state = {}, action) => {
@@ -15,13 +16,21 @@ export const usersReducer = (state = {}, action) => {
       return {
         ...state,
         pending: false,
-        data: action.data
+        data: action.data,
+        error: null
       }
     case FETCH_USER_ERROR:
       return {
         ...state,
         pending: false,
-        error: action.error,
+        error: action.error.message,
+      }
+    case NOT_LOGGED_IN:
+      console.log('signed out')
+      return {
+        ...state,
+        data: action.data,
+        pending: false
       }
     default:
       return state      

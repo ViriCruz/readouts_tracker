@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
 import StopWatch from './stopWatch';
 
-const TrackReading = () => {
-  const [disabled, setDisabled] = useState('');
+const TrackReading = ({ handleSave, disabled }) => {
   const [description, setDescription] = useState('');
-
-  const handleInput = (event) => {
-    event.target.textContent === 'Save' ? setDisabled('disabled') : setDisabled('')
-    event.preventDefault()
-  }
 
   const handleChange = (event) => {
     setDescription(event.target.value)
@@ -29,8 +23,8 @@ const TrackReading = () => {
             onChange={handleChange}
             disabled={disabled}
           />
-          <button type="button" onClick={handleInput}>Save</button>
-          <button type="button" onClick={handleInput}>Edit</button>
+          <button type="button" onClick={(e)=>handleSave(e)} name="save">Save</button>
+          <button type="button" onClick={handleSave} name="edit">Edit</button>
           {/* chronometer */}
         </div>
       </form>
