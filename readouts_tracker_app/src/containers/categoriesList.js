@@ -56,7 +56,7 @@ class Categories extends React.Component {
   }
 
   render(){
-    const { categories, user } = this.props
+    const { categories } = this.props
     const { data, pending, error } = categories
     const { redirect } = this.state
     const local_token = localStorage.getItem('__token__')
