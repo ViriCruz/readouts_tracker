@@ -40,7 +40,7 @@ class Categories extends React.Component {
   componentDidMount(){
     const { fetchCategories, user } = this.props
     const { auth_token } = user.data
-    if(!localStorage.getItem('__token__') && !auth_token) return <Redirect to='/signin' />
+   
     fetchCategories(localStorage.getItem('__token__') || auth_token)
   }
 
@@ -56,11 +56,15 @@ class Categories extends React.Component {
   }
 
   render(){
-    const { categories } = this.props
+    const { categories, user } = this.props
     const { data, pending, error } = categories
     const { redirect } = this.state
+    const local_token = localStorage.getItem('__token__')
 
-
+    // check if user is logged in
+    if(local_token === null){
+      return <Redirect to='/signin' />
+    }
     if(redirect) return <Redirect to="/track_reading" />
     
     if (pending){
