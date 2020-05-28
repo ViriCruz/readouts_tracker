@@ -4,27 +4,41 @@ class StopWatch extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      secondsElapsed: 5
+      secondsElapsed: 3600
     }
 
-    this.getSeconds = this.getSeconds.bind(this)
+    this.formatSeconds = this.formatSeconds.bind(this)
     this.handleStartClick = this.handleStartClick.bind(this)
     this.handleStopClick = this.handleStopClick.bind(this)
   }
 
-  getSeconds() {
+
+  seconds(){
     const { secondsElapsed } = this.state
-    return ('0' + secondsElapsed % 60).slice(-2)
+    return secondsElapsed % 60
   }
 
-  getMinutes() {
+  minutes(){
     const { secondsElapsed } = this.state
-    return ('0' + Math.floor(secondsElapsed / 60)).slice(-2)
+    const minutes = Math.floor(secondsElapsed / 60)
+    return minutes < 60 ? minutes : 0
   }
 
-  getHours() {
+  hours(){
     const { secondsElapsed } = this.state
     return Math.floor(secondsElapsed / 3600)
+  }
+
+  formatSeconds() {
+    return ('0' + this.seconds()).slice(-2)
+  }
+
+  formatMinutes() {
+    return ('0' + this.minutes()).slice(-2)
+  }
+
+  formatHours() {
+    return ('0' + this.hours()).slice(-2)
   }
 
   handleStartClick() {
@@ -37,12 +51,14 @@ class StopWatch extends React.Component{
 
   handleStopClick() {
     clearInterval(this.interval)
+    const { setDuration } = this.props
+    setDuration({ hours: this.hours(), minutes: this.minutes() })
   }
   render() {
     return (
 
       <div className="stopwatch text-center h1">
-        {this.getHours()}:{this.getMinutes()}:{this.getSeconds()}
+        {this.formatHours()}:{this.formatMinutes()}:{this.formatSeconds()}
         <div className="d-flex justify-content-center h4">
           <button type="button" onClick={this.handleStartClick}>Start</button>
           <button type="button" onClick={this.handleStopClick}>Stop</button>
