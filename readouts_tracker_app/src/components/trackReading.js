@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import StopWatch from './stopWatch';
 
-const TrackReading = ({ handleSave, disabled }) => {
-  const [description, setDescription] = useState('');
+const TrackReading = ({ handleSave, disabled, setDuration, setDescription, value }) => {
 
   const handleChange = (event) => {
     setDescription(event.target.value)
@@ -11,7 +10,7 @@ const TrackReading = ({ handleSave, disabled }) => {
   return(
     <div className="vh-100">
       <div className="h-25 d-flex justify-content-center align-items-center">
-        <StopWatch />
+        <StopWatch setDuration={setDuration}/>
       </div>
       <form className="d-flex justify-content-between">
         <div className="form-group col-sm-12">
@@ -19,7 +18,7 @@ const TrackReading = ({ handleSave, disabled }) => {
             className="form-control" 
             placeholder="Add Description"
             name="description"
-            value={description}
+            value={value}
             onChange={handleChange}
             disabled={disabled}
           />
