@@ -20,18 +20,39 @@ class ReadingContainer extends React.Component {
     }
 
     this.handleSave = this.handleSave.bind(this)
+    this.setDescription = this.setDescription.bind(this)
+    this.setDuration = this.setDuration.bind(this)
+  }
+
+  setDuration({ hours, minutes }){
+    this.setState({
+      hours: hours,
+      minutes: minutes
+    })
+  }
+
+  setDescription(desc){
+    this.setState({
+      description: desc
+    })
   }
 
   handleSave(event){
     event.target.textContent === 'Save' ? this.setState({ disabled: 'disabled'}) : this.setState({ disabled: ''})
-    console.log(event)
+    console.log(this.state)
     event.preventDefault()
   }
 
   render() {
-    const { disabled } = this.state
+    const { disabled, description } = this.state
     return(
-      <TrackReading handleSave={this.handleSave} disabled={disabled}/>
+      <TrackReading 
+        handleSave={this.handleSave} 
+        disabled={disabled} 
+        setDescription={this.setDescription} 
+        setDuration={this.setDuration}
+        value={description}
+      />
     )
   }
 }
