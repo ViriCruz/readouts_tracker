@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import StopWatch from './stopWatch';
 
-const TrackReading = ({ handleSave, disabled, setDuration, setDescription, value }) => {
+const TrackReading = ({ handleSave,setDuration, setDescription, value }) => {
 
   const handleChange = (event) => {
     setDescription(event.target.value)
@@ -20,7 +20,6 @@ const TrackReading = ({ handleSave, disabled, setDuration, setDescription, value
             name="description"
             value={value}
             onChange={handleChange}
-            disabled={disabled}
           />
           <button type="button" onClick={(e)=>handleSave(e)} name="save">Save</button>
           <button type="button" onClick={handleSave} name="edit">Edit</button>
