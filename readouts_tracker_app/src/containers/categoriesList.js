@@ -75,7 +75,7 @@ class Categories extends React.Component {
       )
     }
 
-    if(data.categories.length > 0){
+    if('categories' in data){
       return(
         <div className="vh-100">
           <h1 className="text-center">Select a category to measure</h1>
