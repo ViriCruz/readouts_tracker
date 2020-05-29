@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import StopWatch from './stopWatch';
 
-const TrackReading = ({ handleSave,setDuration, setDescription, value }) => {
+const TrackReading = ({ handleSave, duration, setDescription, value }) => {
 
   const handleChange = (event) => {
     setDescription(event.target.value)
@@ -10,7 +10,7 @@ const TrackReading = ({ handleSave,setDuration, setDescription, value }) => {
   return(
     <div className="vh-100">
       <div className="h-25 d-flex justify-content-center align-items-center">
-        <StopWatch setDuration={setDuration}/>
+        <StopWatch handleSave={handleSave} duration={duration}/>
       </div>
       <form className="d-flex justify-content-between">
         <div className="form-group col-sm-12">
@@ -23,7 +23,6 @@ const TrackReading = ({ handleSave,setDuration, setDescription, value }) => {
           />
           <button type="button" onClick={(e)=>handleSave(e)} name="save">Save</button>
           <button type="button" onClick={handleSave} name="edit">Edit</button>
-          {/* chronometer */}
         </div>
       </form>
     </div>

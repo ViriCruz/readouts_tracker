@@ -4,14 +4,21 @@ class StopWatch extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      secondsElapsed: 3600
+      secondsElapsed: 0
     }
 
     this.formatSeconds = this.formatSeconds.bind(this)
+    this.formatMinutes = this.formatMinutes.bind(this)
+    this.formatHours = this.formatHours.bind(this)
+    
+    this.seconds = this.seconds.bind(this)
+    this.minutes = this.minutes.bind(this)
+    this.hours = this.hours.bind(this)
     this.handleStartClick = this.handleStartClick.bind(this)
     this.handleStopClick = this.handleStopClick.bind(this)
+    this.onChange = this.onChange.bind(this)
+    
   }
-
 
   seconds(){
     const { secondsElapsed } = this.state
@@ -43,21 +50,24 @@ class StopWatch extends React.Component{
 
   handleStartClick() {
     this.interval = setInterval(() => {
-      this.setState({
-        secondsElapsed: this.state.secondsElapsed + 1
-      })
+      this.setState(state => ({
+        secondsElapsed: state.secondsElapsed + 1
+      }))
     }, 1000);
   }
 
-  handleStopClick() {
+  handleStopClick(event) {
     clearInterval(this.interval)
-    const { setDuration } = this.props
-    setDuration({ hours: this.hours(), minutes: this.minutes() })
+    const { duration } = this.props
+    const hours = this.hours()
+    const minutes = this.minutes()
+    duration(hours, minutes, event)
   }
+
   render() {
     return (
 
-      <div className="stopwatch text-center h1">
+      <div className="stopwatch text-center h1" id="stopwatch">
         {this.formatHours()}:{this.formatMinutes()}:{this.formatSeconds()}
         <div className="d-flex justify-content-center h4">
           <button type="button" onClick={this.handleStartClick}>Start</button>

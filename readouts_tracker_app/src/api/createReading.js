@@ -33,7 +33,6 @@ const pushReading = (category, token, data, action, id=null) => async dispatch =
     
     if(response.ok) {
       dispatch(fetchReadingsSuccess(json))
-      console.log('some', json, response)
       return json;
     }
 

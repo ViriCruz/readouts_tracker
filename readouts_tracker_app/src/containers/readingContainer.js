@@ -35,10 +35,14 @@ class ReadingContainer extends React.Component {
     this.setDuration = this.setDuration.bind(this)
   }
 
-  setDuration({ hours, minutes }){
+  setDuration(hours, minutes, event){
+    const { preventDefault, target } = event
+    
     this.setState({
       hours: hours,
       minutes: minutes
+    }, () => {
+      this.handleSave({target, preventDefault})
     })
   }
 
@@ -49,12 +53,11 @@ class ReadingContainer extends React.Component {
   }
 
   handleSave(event){
-    // event.target.textContent === 'Save' ? this.setState({ disabled: 'disabled'}) : this.setState({ disabled: ''})
     const { category, pushReading, readings } = this.props
     const today = new Date();
     const day = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
     const { description, hours, minutes } = this.state
-
+    
     if (event.target.textContent === 'Save'){
       pushReading(category.id, localStorage.getItem('__token__'),{ description, hours, minutes, day }, 'save' )
     }else{
@@ -66,15 +69,14 @@ class ReadingContainer extends React.Component {
   }
 
   render() {
-    const { disabled, description } = this.state
+    const { description } = this.state
     const { category } = this.props
     if(!category) return <Redirect to='/categories' />
     return(
       <TrackReading 
-        handleSave={this.handleSave} 
-        disabled={disabled} 
+        handleSave={this.handleSave}  
         setDescription={this.setDescription} 
-        setDuration={this.setDuration}
+        duration={this.setDuration}
         value={description}
       />
     )

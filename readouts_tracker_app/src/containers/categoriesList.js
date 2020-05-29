@@ -84,6 +84,12 @@ class Categories extends React.Component {
           }
         </div>
       )
+    }else {
+      return (
+        <div className="d-flex justify-content-center flex-column">
+          <Spinner animation="grow" />
+        </div>
+      )
     }
 
     
