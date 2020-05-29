@@ -4,7 +4,8 @@ import RegistrationForm from '../containers/registrationForm';
 import CategoriesList from '../containers/categoriesList'
 import LoginForm from '../containers/loginForm';
 import Navbar from '../containers/navbar'
-import readingContainer from '../containers/readingContainer';
+import ReadingContainer from '../containers/readingContainer';
+import Measure from '../containers/measurements'
 
 class App extends React.Component {
   render(){
@@ -37,7 +38,12 @@ class App extends React.Component {
             <Route 
               exact
               path={'/track_reading'}
-              component={readingContainer}
+              component={ReadingContainer}
+            />
+            <Route
+              exact
+              path={'/measurements'}
+              component={Measure}
             />
           </Switch>
         </div>
