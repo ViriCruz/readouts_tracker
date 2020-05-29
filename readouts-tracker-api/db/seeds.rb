@@ -25,3 +25,29 @@ Category.create!(
 Category.create!(
   name: "comics"
 )
+
+User.create!(
+  first_name: "John",
+  last_name: "smith",
+  email: "smith12@test.com",
+  password: "foobar",
+  password_confirmation: "foobar"
+)
+
+Reading.create!(
+  description: "reading a book",
+  hours: 0,
+  minutes: 0,
+  day: Date.today,
+  category_id: 1,
+  user_id: 1
+)
+
+Reading.create!(
+  description: "reading a book 2",
+  hours: 0,
+  minutes: 0,
+  day: Date.today,
+  category_id: 1,
+  user_id: 1 
+)

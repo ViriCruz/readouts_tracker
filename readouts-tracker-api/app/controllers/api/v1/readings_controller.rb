@@ -72,7 +72,9 @@ class Api::V1::ReadingsController < ApplicationController
   end
 
   def convert_minutes_to_hours
-    original_minutes.first[1] / 60 if greater_than_sixty?
+    return original_minutes.first[1] / 60 if greater_than_sixty?
+
+    original_minutes.first[1]
   end
 
   def greater_than_sixty?
