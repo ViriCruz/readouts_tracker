@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   end
   post 'auth/login', to: 'authentication#authenticate'
   post 'signup', to: 'api/v1/users#create'
-  get "api/v1/categories/:category_id/readings/total_time", to: 'api/v1/readings#total_time', as: 'total_time'
+  get "api/v1/categories/:category_id/readings/total_time/:day", to: 'api/v1/readings#total_time', as: 'total_time'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

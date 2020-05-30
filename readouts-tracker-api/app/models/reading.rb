@@ -1,5 +1,5 @@
 class Reading < ApplicationRecord
-  scope :filter_by_category_and_day, lambda { |category_id = nil, day = Date.today|
+  scope :filter_by_category_and_day, lambda { |category_id = nil, day = nil|
     where(category_id: category_id, day: day)
   }
   scope :sum_hours, -> { joins(:category).group('categories.name').sum(:hours) }
