@@ -14,24 +14,24 @@ class Api::V1::ReadingsController < ApplicationController
   end
 
   def total_time
-    if(original_hours.first.nil? || original_minutes.first.nil?)
-      json = {
-        data: {
-          message: "Not readings found for #{params[:day]}"
-        }
-      }
-    else
-      json = {
-        data: {
-          total_time: {
-            category: @category.name,
-            total_time: format_time,
-            date: params[:day]
-          }
-        }
-      }
-    end  
-    
+    json = if original_hours.first.nil? || original_minutes.first.nil?
+             {
+               data: {
+                 message: "Not readings found for #{params[:day]}"
+               }
+             }
+           else
+             {
+               data: {
+                 total_time: {
+                   category: @category.name,
+                   total_time: format_time,
+                   date: params[:day]
+                 }
+               }
+             }
+           end
+
     json_response(json.to_json)
   end
 
@@ -71,17 +71,17 @@ class Api::V1::ReadingsController < ApplicationController
       current_user
         .readings
         .filter_by_category_and_day(@category.id, params[:day])
-        .sum_hours   
-    hours    
+        .sum_hours
+    hours
   end
 
   def original_minutes
-    minutes = 
+    minutes =
       current_user
         .readings
         .filter_by_category_and_day(@category.id, params[:day])
-        .sum_minutes  
-    minutes   
+        .sum_minutes
+    minutes
   end
 
   def convert_minutes_to_hours
@@ -96,13 +96,14 @@ class Api::V1::ReadingsController < ApplicationController
 
   def total_hours
     return original_hours.first[1] + convert_minutes_to_hours unless original_hours.first.nil?
+
     0
   end
 
   def format_time
     hours = total_hours # sum this to total hours
     rest = original_minutes.first.nil? ? 0 : original_minutes.first[1] % 60
-    
+
     format_hours = lower_than_ten?(hours) ? "0#{hours}" : hours.to_s
     format_minutes = lower_than_ten?(rest) ? "0#{rest}" : rest.to_s
     "#{format_hours}:#{format_minutes}"
