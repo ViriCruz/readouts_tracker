@@ -14,6 +14,7 @@ class Api::V1::ReadingsController < ApplicationController
   end
 
   def total_time
+    print('category', @category.name)
     json = {
       data: {
         total_time: {
@@ -58,6 +59,10 @@ class Api::V1::ReadingsController < ApplicationController
   end
 
   def original_hours
+    print('hours',current_user
+      .readings
+      .filter_by_category_and_day(@category.id)
+      .sum_hours)
     current_user
       .readings
       .filter_by_category_and_day(@category.id)
@@ -65,6 +70,10 @@ class Api::V1::ReadingsController < ApplicationController
   end
 
   def original_minutes
+    print('minutes',current_user
+      .readings
+      .filter_by_category_and_day(@category.id)
+      .sum_minutes)
     current_user
       .readings
       .filter_by_category_and_day(@category.id)
@@ -72,6 +81,7 @@ class Api::V1::ReadingsController < ApplicationController
   end
 
   def convert_minutes_to_hours
+    print('greater than 60', greater_than_sixty?)
     return original_minutes.first[1] / 60 if greater_than_sixty?
 
     original_minutes.first[1]
@@ -88,9 +98,10 @@ class Api::V1::ReadingsController < ApplicationController
   def format_time
     hours = total_hours # sum this to total hours
     rest = original_minutes.first[1] % 60
-
+    print('format hours', hours, 'rest', rest)
     format_hours = lower_than_ten?(hours) ? "0#{hours}" : hours.to_s
     format_minutes = lower_than_ten?(rest) ? "0#{rest}" : rest.to_s
+    print('formated', format_hours,'min', format_minutes)
     "#{format_hours}:#{format_minutes}"
   end
 
