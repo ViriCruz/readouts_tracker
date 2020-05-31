@@ -8,7 +8,7 @@ const TrackReading = ({ handleSave, duration, setDescription, value }) => {
   }
 
   return(
-    <div className="vh-100">
+    <div>
       <div className="h-25 d-flex justify-content-center align-items-center">
         <StopWatch handleSave={handleSave} duration={duration}/>
       </div>
