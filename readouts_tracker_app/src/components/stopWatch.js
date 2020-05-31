@@ -16,8 +16,6 @@ class StopWatch extends React.Component{
     this.hours = this.hours.bind(this)
     this.handleStartClick = this.handleStartClick.bind(this)
     this.handleStopClick = this.handleStopClick.bind(this)
-    this.onChange = this.onChange.bind(this)
-    
   }
 
   seconds(){
