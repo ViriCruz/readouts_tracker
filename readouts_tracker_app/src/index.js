@@ -21,6 +21,7 @@ const store = createStore(rootReducer, {
   categories: initialState,
   readings: initialState,
   measurements: initialState,
+  totalTime: initialState,
   category: {}
 }, applyMiddleware(...middlewares));
 
