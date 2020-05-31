@@ -11,6 +11,9 @@ const FETCH_CATEGORIES_ERROR = 'FETCH_CATEGORIES_ERROR';
 const FETCH_READINGS_PENDING = 'FETCH_READINGS_PENDING';
 const FETCH_READINGS_SUCCESS = 'FETCH_READINGS_SUCCESS';
 const FETCH_READINGS_ERROR = 'FETCH_READINGS_ERROR';
+const FETCH_TOTAL_TIME_PENDING = 'FETCH_TOTAL_TIME_PENDING';
+const FETCH_TOTAL_TIME_SUCCESS = 'FETCH_TOTAL_TIME_SUCCESS';
+const FETCH_TOTAL_TIME_ERROR = 'FETCH_TOTAL_TIME_ERROR';
 // measurements
 const FETCH_MEASUREMENTS_PENDING = 'FETCH_MEASUREMENTS_PENDING';
 const FETCH_MEASUREMENTS_SUCCESS = 'FETCH_MEASUREMENTS_SUCCESS';
@@ -86,7 +89,19 @@ const setCategory = category => ({
   category
 })
 
+const fetchTotalTimePending = () => ({
+  type: FETCH_TOTAL_TIME_PENDING
+})
 
+const fetchTotalTimeSuccess = data => ({
+  type: FETCH_TOTAL_TIME_SUCCESS,
+  data
+})
+
+const fetchTotalTimeError = error => ({
+  type: FETCH_TOTAL_TIME_ERROR,
+  error
+})
 
 export {
   FETCH_USER_PENDING,
@@ -101,6 +116,9 @@ export {
   FETCH_MEASUREMENTS_PENDING,
   FETCH_MEASUREMENTS_SUCCESS,
   FETCH_MEASUREMENTS_ERROR,
+  FETCH_TOTAL_TIME_PENDING,
+  FETCH_TOTAL_TIME_ERROR,
+  FETCH_TOTAL_TIME_SUCCESS,
   SET_CATEGORY,
   NOT_LOGGED_IN,
   fetchUserPending,
@@ -115,6 +133,9 @@ export {
   fetchMeasurementsPending,
   fetchMeasurementsSuccess,
   fetchMeasurementsError,
+  fetchTotalTimeError,
+  fetchTotalTimePending,
+  fetchTotalTimeSuccess,
   setCategory,
   userSignOut
 };
