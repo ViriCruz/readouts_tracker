@@ -30,9 +30,9 @@ const pushReading = (category, token, data, action, id=null) => async dispatch =
       }
     )
     const json = await response.json();
-    
+    const res = {...json, status: response.status}
     if(response.ok) {
-      dispatch(fetchReadingsSuccess(json))
+      dispatch(fetchReadingsSuccess(res))
       return json;
     }
 

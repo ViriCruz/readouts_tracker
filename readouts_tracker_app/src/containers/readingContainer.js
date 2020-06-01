@@ -37,13 +37,27 @@ class ReadingContainer extends React.Component {
       description: '',
       hours: 0,
       minutes: 0,
-      operation: ''
+      operation: '',
+      buttonClicked: ''
     }
 
     this.handleSave = this.handleSave.bind(this)
     this.setDescription = this.setDescription.bind(this)
     this.setDuration = this.setDuration.bind(this)
   }
+
+  componentDidUpdate(prevProps) {
+    const { category, totalReadingTime } = this.props
+    const { hours, minutes } = this.props.readings.data
+    const today = new Date();
+    const day = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    const token = localStorage.getItem('__token__')
+
+    if((prevProps.readings.data.hours !== hours) || (prevProps.readings.data.minutes !== minutes )){
+      totalReadingTime(token, category.id, day)
+    }
+  }
+  
 
   setDuration(hours, minutes, event){
     const { preventDefault, target } = event
@@ -65,23 +79,21 @@ class ReadingContainer extends React.Component {
     const { category, pushReading, readings, totalReadingTime } = this.props
     const today = new Date();
     const day = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    const { description, hours, minutes } = this.state
+    const { description, hours, minutes, buttonClicked } = this.state
     const token = localStorage.getItem('__token__')
     
     if (event.target.textContent === 'Save'){
-      pushReading(category.id, localStorage.getItem('__token__'),{ description, hours, minutes, day }, 'save' )
+      pushReading(category.id, token,{ description, hours, minutes, day }, 'save' )
       this.setState({
-        operation: 'Saved!'
+        operation: 'Saved!',
+        buttonClicked: 'Save'
       })
-    }else{
+    }else {
       const { id } = readings.data
-      pushReading(category.id, localStorage.getItem('__token__'), { description, hours, minutes, day }, 'edit' , id)
+      pushReading(category.id, token, { description, hours, minutes, day }, 'edit' , id)
       this.setState({
-        operation: 'Edited!'
-      }, () => {
-        if(event.target.textContent === 'Stop') {
-          totalReadingTime(token, category.id, day)
-        }
+        operation: 'Edited!',
+        buttonClicked: event.target.textContent
       })
     }
  
@@ -93,7 +105,7 @@ class ReadingContainer extends React.Component {
     const { category } = this.props
     const { data } = this.props.readings
     if(!category) return <Redirect to='/categories' />
-
+    
     return(
       <div>
         <TrackReading 

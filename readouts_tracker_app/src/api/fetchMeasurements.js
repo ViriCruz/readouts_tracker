@@ -2,8 +2,9 @@ import
   { fetchMeasurementsSuccess, fetchMeasurementsPending, fetchMeasurementsError } 
 from "../actions"
 
+import {DOMAIN} from './domain'
 
-const measurements = async token => {
+const measurements = async (token, day) => {
   const request_options = {
     method: 'GET',
     headers: {
@@ -12,14 +13,14 @@ const measurements = async token => {
     }
   }
 
-  const response = await fetch(`${DOMAIN}/api/v1/measurements`, request_options)
+  const response = await fetch(`${DOMAIN}/api/v1/measurements/${day}`, request_options)
   return response
 }
 
-const fetchMeasurements = token => async dispatch => {
+const fetchMeasurements = (token, day) => async dispatch => {
   dispatch(fetchMeasurementsPending)
   try {
-    const response = measurements(token)
+    const response = measurements(token, day)
 
     const load = await response;
     const json = await load.json();
