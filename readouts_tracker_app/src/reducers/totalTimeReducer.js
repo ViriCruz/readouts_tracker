@@ -5,6 +5,8 @@ import {
 } from '../actions/index'
 
 export const totalTimeReducer = (state = {}, action) => {
+  
+  console.log('state', state, 'action', action)
   switch(action.type) {
     case FETCH_TOTAL_TIME_ERROR:
       return {
@@ -18,6 +20,7 @@ export const totalTimeReducer = (state = {}, action) => {
         pending: true,
       } 
     case FETCH_TOTAL_TIME_SUCCESS:
+      console.log('state', state, 'action', action.data)
       return {
         ...state,
         pending: false, 

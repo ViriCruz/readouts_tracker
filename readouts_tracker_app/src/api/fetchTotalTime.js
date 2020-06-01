@@ -17,20 +17,42 @@ const totalTime = async(token, cat, date) => {
   return response
 }
 
+const createMeasure = async(token, cat, data) => {
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-type':'application/json',
+      'Authorization': token
+    },
+    body: JSON.stringify(data)
+  }
+  const response = await fetch(`${DOMAIN}/api/v1/categories/${cat}/measurements`, requestOptions)
+  return response
+}
+
 const fetchTotalTime = (token, cat, date) => async dispatch => {
   // pending
   dispatch(fetchTotalTimePending)
   try {
     // success
     const response = totalTime(token, cat, date)
-    const json = await response.json()
-    if (response.ok){
-      console.log(json);
-      dispatch(fetchTotalTimeSuccess(json))
+    const load = await response;
+    const json = await load.json()
+    const data = {
+      total_time: json.data.total_time.total_time,
+      day: date
+    }
+    createMeasure(token, cat, data)
+    
+    
+    if (load.ok){
+      
+      dispatch(fetchTotalTimeSuccess(json.data.total_time))
+
       return json
     }
     
-    throw new Error(response.status)
+    throw new Error(load.status)
   } catch (error) {
     // error
     dispatch(fetchTotalTimeError(error))

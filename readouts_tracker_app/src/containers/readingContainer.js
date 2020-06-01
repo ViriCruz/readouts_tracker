@@ -9,7 +9,8 @@ import { getReadings, getReadingsError, getReadingsPending } from '../reducers/r
 import { getTotalTime, getTotalTimeError, getTotalTimePending } from '../reducers/totalTimeReducer'
 import { Redirect } from 'react-router';
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => (
+  {
   category: getCategory(state.category),
   readings: {
     pending: getReadingsPending(state.readings),
@@ -25,7 +26,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   pushReading: Reading.pushReading,
-  totalTime: TotalTime.fetchTotalTime
+  totalReadingTime: TotalTime.fetchTotalTime
 }, dispatch)
 
 class ReadingContainer extends React.Component {
@@ -36,6 +37,7 @@ class ReadingContainer extends React.Component {
       description: '',
       hours: 0,
       minutes: 0,
+      operation: ''
     }
 
     this.handleSave = this.handleSave.bind(this)
@@ -45,17 +47,11 @@ class ReadingContainer extends React.Component {
 
   setDuration(hours, minutes, event){
     const { preventDefault, target } = event
-    const { totalTime } = this.props
-    const { id } = this.props.category
-    const token = localStorage.getItem('__token__')
-    const today = new Date();
-    const day = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     this.setState({
       hours: hours,
       minutes: minutes
     }, () => {
       this.handleSave({target, preventDefault})
-      totalTime(token, id, day)
     })
   }
 
@@ -66,23 +62,34 @@ class ReadingContainer extends React.Component {
   }
 
   handleSave(event){
-    const { category, pushReading, readings } = this.props
+    const { category, pushReading, readings, totalReadingTime } = this.props
     const today = new Date();
-    const day = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+    const day = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     const { description, hours, minutes } = this.state
+    const token = localStorage.getItem('__token__')
     
     if (event.target.textContent === 'Save'){
       pushReading(category.id, localStorage.getItem('__token__'),{ description, hours, minutes, day }, 'save' )
+      this.setState({
+        operation: 'Saved!'
+      })
     }else{
       const { id } = readings.data
       pushReading(category.id, localStorage.getItem('__token__'), { description, hours, minutes, day }, 'edit' , id)
+      this.setState({
+        operation: 'Edited!'
+      }, () => {
+        if(event.target.textContent === 'Stop') {
+          totalReadingTime(token, category.id, day)
+        }
+      })
     }
  
     event.preventDefault()
   }
 
   render() {
-    const { description } = this.state
+    const { description, operation } = this.state
     const { category } = this.props
     const { data } = this.props.readings
     if(!category) return <Redirect to='/categories' />
@@ -97,7 +104,7 @@ class ReadingContainer extends React.Component {
         />
         <div 
           className={'id' in data ? 'alert alert-success d-block' : 'd-none'}>
-          Saved!
+          {operation}
         </div> 
         
       </div>
