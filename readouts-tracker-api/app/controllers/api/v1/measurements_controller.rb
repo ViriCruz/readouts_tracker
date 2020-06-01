@@ -4,7 +4,7 @@ class Api::V1::MeasurementsController < ApplicationController
 
   # GET /measurements
   def index
-    @measurements = current_user.measurements
+    @measurements = current_user.measurements.all_measurements(params[:day])
 
     json_response(:index)
   end
