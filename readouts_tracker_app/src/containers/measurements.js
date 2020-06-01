@@ -1,7 +1,10 @@
 import React from 'react'
 import {Radar, RadarChart, PolarGrid, Legend,
   PolarAngleAxis, PolarRadiusAxis} from 'recharts';
-
+import Measurements from '../api/fetchMeasurements';
+import { getMeasurements, getMeasurementsError, getMeasurementsPending } from '../reducers/measurementReducer'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 const data = [
     { subject: 'books', A: 120, B: 110, fullMark: 20 },
@@ -12,7 +15,26 @@ const data = [
     
 ];
 
+const mapStateToProps = state => ({
+  measurements: {
+    data: getMeasurements(state.measurements),
+    error: getMeasurementsError(state.measurements),
+    pending: getMeasurementsPending(state.measurements)
+  }
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  fetchMeasurements : Measurements.fetchMeasurements
+}, dispatch)
+
 class Measure extends React.Component {
+
+  componentDidMount(){
+    const { fetchMeasurements } = this.props
+    const token = localStorage.getItem('__token__')
+    fetchMeasurements(token)
+  }
+  
   render () {
     return (
       <RadarChart cx={150} cy={200} outerRadius={70} width={600} height={500} data={data}>
@@ -25,4 +47,4 @@ class Measure extends React.Component {
   }
 }
 
-export default Measure
+export default connect(mapStateToProps, mapDispatchToProps)(Measure)
