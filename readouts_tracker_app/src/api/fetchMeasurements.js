@@ -24,9 +24,27 @@ const fetchMeasurements = (token, day) => async dispatch => {
 
     const load = await response;
     const json = await load.json();
+    let cat = ''
+    const output = json.data.measurements.map( m => {
+      if(m.category !== cat){
+        cat = m.category
+        return m
+      }
+    }).filter(m => m !== undefined)
+    .reduce((m, current, i) => {
+      m[i] = {
+        name: current.category,
+        day: current.day,
+        value: parseFloat(
+          parseInt(current.total_time.slice(0,2))
+          +'.'+
+          parseInt(current.total_time.slice(3)))
+      }
+      return m
+    },[]);
+    console.log('json', json)
     if(load.ok){
-      // dispatch action
-      dispatch(fetchMeasurementsSuccess(json))
+      dispatch(fetchMeasurementsSuccess(output))
       return json;
     }
     throw new Error(load.status)

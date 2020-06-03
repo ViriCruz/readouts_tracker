@@ -76,10 +76,10 @@ class ReadingContainer extends React.Component {
   }
 
   handleSave(event){
-    const { category, pushReading, readings, totalReadingTime } = this.props
+    const { category, pushReading, readings } = this.props
     const today = new Date();
     const day = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    const { description, hours, minutes, buttonClicked } = this.state
+    const { description, hours, minutes } = this.state
     const token = localStorage.getItem('__token__')
     
     if (event.target.textContent === 'Save'){
