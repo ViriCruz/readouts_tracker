@@ -68,8 +68,8 @@ class StopWatch extends React.Component{
       <div className="stopwatch text-center h1" id="stopwatch">
         {this.formatHours()}:{this.formatMinutes()}:{this.formatSeconds()}
         <div className="d-flex justify-content-center h4">
-          <button type="button" onClick={this.handleStartClick}>Start</button>
-          <button type="button" onClick={this.handleStopClick}>Stop</button>
+          <button type="button" onClick={this.handleStartClick} name="start">Start</button>
+          <button type="button" onClick={this.handleStopClick} name="stop">Stop</button>
         </div>
       </div>
     )

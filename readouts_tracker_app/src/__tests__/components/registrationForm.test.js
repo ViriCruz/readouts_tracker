@@ -22,13 +22,6 @@ describe('Registration form tests', () => {
           />
       </Router>
     )
-    Object.defineProperty(window, "localStorage", {
-      value: {
-        getItem: jest.fn(() => ({'__token__': ''})),
-        setItem: jest.fn(() => ({'__token__':''}))
-      },
-      writable: true
-    });
   })
 
   it('should render form', () => {

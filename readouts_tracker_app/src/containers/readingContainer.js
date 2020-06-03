@@ -29,7 +29,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   totalReadingTime: TotalTime.fetchTotalTime
 }, dispatch)
 
-class ReadingContainer extends React.Component {
+export class ReadingContainer extends React.Component {
 
   constructor(props){
     super(props)
