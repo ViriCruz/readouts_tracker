@@ -37,7 +37,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   fetchMeasurements : Measurements.fetchMeasurements
 }, dispatch)
 
-class Measure extends React.Component {
+export class Measure extends React.Component {
 
   constructor(props){
     super(props)
@@ -87,7 +87,7 @@ class Measure extends React.Component {
               {
                 data.map((_entry, index) => {
                   categories[index] = { name: _entry.name, fill: COLORS[index % COLORS.length]}
-                  return <Cell fill={COLORS[index % COLORS.length]}/>
+                  return <Cell fill={COLORS[index % COLORS.length]} key={index % COLORS.length} />
                 })
               }
             </Pie>
@@ -97,7 +97,9 @@ class Measure extends React.Component {
               {
                 categories.map(cat => {
                   return <li 
-                    style={{backgroundColor: cat.fill, width:"20px", height:"20px", paddingLeft:"20px"}}>
+                    style={{backgroundColor: cat.fill, width:"20px", height:"20px", paddingLeft:"20px"}}
+                    key={cat.fill}
+                    >
                     <span className="ml-2">{cat.name}</span>
                     </li>
                 }) 
