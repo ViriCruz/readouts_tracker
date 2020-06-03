@@ -7,14 +7,13 @@ import { SignInLinks } from '../components/signinLinks'
 import { SignOutLinks } from '../components/signoutLinks'
 import { getUser, getUserPending, getUserError } from '../reducers/userReducer'
 
-class Navbar extends React.Component{
+export class Navbar extends React.Component{
   constructor(props){
     super(props)
     this.handleLogout = this.handleLogout.bind(this)
   }
 
   handleLogout(){
-    console.log('logout')
     const { signout_user } = this.props
     signout_user()
   }
