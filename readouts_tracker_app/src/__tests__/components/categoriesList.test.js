@@ -1,4 +1,4 @@
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
 import { Categories } from '../../containers/categoriesList';
 import { BrowserRouter as Router } from 'react-router-dom';

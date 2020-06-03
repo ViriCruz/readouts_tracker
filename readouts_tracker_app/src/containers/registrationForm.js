@@ -18,7 +18,7 @@ const mapStateToProps = state => ({
   }
 })
 
-class RegistrationForm extends React.Component {
+export class RegistrationForm extends React.Component {
   constructor(props) {
     super(props);
 
