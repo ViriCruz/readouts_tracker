@@ -28,7 +28,7 @@ const mapStateToProps = state => ({
   category: getCategory(state.category)
 })
 
-class Categories extends React.Component {
+export class Categories extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -59,10 +59,10 @@ class Categories extends React.Component {
     const { categories } = this.props
     const { data, pending, error } = categories
     const { redirect } = this.state
-    const local_token = localStorage.getItem('__token__')
+    const localToken = localStorage.getItem('__token__')
 
     // check if user is logged in
-    if(local_token === null){
+    if(localToken === null){
       return <Redirect to='/signin' />
     }
     if(redirect) return <Redirect to="/track_reading" />
