@@ -12,8 +12,6 @@ const SignOutLinks = ({ handleLogout }) => (
         <Link to="/measurements" className="text-white">Measurements</Link>
       </li>
     </ul>
-
-
   </div>
 );
 
