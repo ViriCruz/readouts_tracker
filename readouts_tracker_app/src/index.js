@@ -7,6 +7,7 @@ import rootReducer from './reducers/index';
 import App from './components/app'
 import './styles/reset.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/custom.css'
 
 const middlewares = [thunk];
 
