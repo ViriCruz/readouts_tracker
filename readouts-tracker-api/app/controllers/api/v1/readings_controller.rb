@@ -71,7 +71,7 @@ class Api::V1::ReadingsController < ApplicationController
       current_user
         .readings
         .filter_by_category_and_day(@category.id, params[:day])
-        .sum_hours  
+        .sum_hours
     hours
   end
 
@@ -80,7 +80,7 @@ class Api::V1::ReadingsController < ApplicationController
       current_user
         .readings
         .filter_by_category_and_day(@category.id, params[:day])
-        .sum_minutes   
+        .sum_minutes
     minutes
   end
 
@@ -101,7 +101,7 @@ class Api::V1::ReadingsController < ApplicationController
   end
 
   def format_time
-    hours = total_hours 
+    hours = total_hours
     rest = original_minutes.first.nil? ? 0 : original_minutes.first[1] % 60
     format_hours = lower_than_ten?(hours) ? "0#{hours}" : hours.to_s
     format_minutes = lower_than_ten?(rest) ? "0#{rest}" : rest.to_s
