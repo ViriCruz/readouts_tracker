@@ -21,7 +21,7 @@ const mapStateToProps = state => ({
   }
 )
 
-class LoginForm extends React.Component {
+export class LoginForm extends React.Component {
 
   constructor(props){
     super(props)
@@ -62,9 +62,11 @@ class LoginForm extends React.Component {
   render() {
     const { user } = this.props
     const { pending, error, data } = user
-    if(data.auth_token || localStorage.getItem('__token__')) return <Redirect to='/categories' />
+    if(data.auth_token || localStorage.getItem('__token__')){
+      return <Redirect to='/categories' />
+    }
     
-    if(!pending){
+    if(!(data.auth_token || localStorage.getItem('__token__'))){
       return (
         <div className="vh-100 d-flex flex-column align-items-center justify-content-center">
           <div 
@@ -117,22 +119,22 @@ class LoginForm extends React.Component {
         </div>
       )
     }
-    
-    return (
-      <div className="vh-100 d-flex align-items-center justify-content-center">
-        <Button variant="primary" disabled>
-          <Spinner
-            as="span"
-            animation="border"
-            size="sm"
-            role="status"
-            aria-hidden="true"
-          />
-          Loading...
-        </Button>
-      </div>
-    )
-    
+    if(pending){
+      return (
+        <div className="vh-100 d-flex align-items-center justify-content-center">
+          <Button variant="primary" disabled>
+            <Spinner
+              as="span"
+              animation="border"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />
+            Loading...
+          </Button>
+        </div>
+      )
+    }
   }
 }
 

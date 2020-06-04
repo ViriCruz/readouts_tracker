@@ -26,7 +26,6 @@ export const usersReducer = (state = {}, action) => {
         error: action.error.message,
       }
     case NOT_LOGGED_IN:
-      console.log('signed out')
       return {
         ...state,
         data: action.data,
