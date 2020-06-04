@@ -17,6 +17,10 @@ const measurements = async (token, day) => {
   return response
 }
 
+const extractNumber = text => {
+  return parseInt(text)
+}
+
 const fetchMeasurements = (token, day) => async dispatch => {
   dispatch(fetchMeasurementsPending)
   try {
@@ -42,7 +46,6 @@ const fetchMeasurements = (token, day) => async dispatch => {
       }
       return m
     },[]);
-    console.log('json', json)
     if(load.ok){
       dispatch(fetchMeasurementsSuccess(output))
       return json;
