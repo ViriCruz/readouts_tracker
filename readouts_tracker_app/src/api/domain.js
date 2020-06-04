@@ -1,1 +1,3 @@
-export const DOMAIN = 'https://still-lake-33664.herokuapp.com';
+const DOMAIN = 'https://still-lake-33664.herokuapp.com';
+
+export default DOMAIN;

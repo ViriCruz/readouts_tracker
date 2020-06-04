@@ -1,85 +1,85 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom'
-import Auth from '../api/loginUser'
-import { connect } from 'react-redux'
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getUser, getUserPending, getUserError } from '../reducers/userReducer';
 import Spinner from 'react-bootstrap/Spinner';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import PropTypes from 'prop-types';
+import { getUser, getUserPending, getUserError } from '../reducers/userReducer';
+import Auth from '../api/loginUser';
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  signin_user: Auth.signin,
-  signout_user: Auth.signout
+  signinUser: Auth.signin,
+  signoutUser: Auth.signout,
 }, dispatch);
 
 const mapStateToProps = state => ({
-    user: {
-      error: getUserError(state.user),
-      data: getUser(state.user),
-      pending: getUserPending(state.user)
-    }
-  }
-)
+  user: {
+    error: getUserError(state.user),
+    data: getUser(state.user),
+    pending: getUserPending(state.user),
+  },
+}
+);
 
 export class LoginForm extends React.Component {
-
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
-      email: "",
-      password: ""
+      email: '',
+      password: '',
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount(){
-    const { signout_user } = this.props
-    signout_user()
+  componentDidMount() {
+    const { signoutUser } = this.props;
+    signoutUser();
   }
 
-  handleSubmit(event){
+  handleSubmit(event) {
     event.preventDefault();
-    const { email, password } = this.state
-    const { signin_user } = this.props
+    const { email, password } = this.state;
+    const { signinUser } = this.props;
     const data = {
-      email: email,
-      password: password
-    }
-    signin_user(data)
+      email,
+      password,
+    };
+    signinUser(data);
     // send to api login
-
   }
 
-  handleChange(event){
+  handleChange(event) {
     event.preventDefault();
     this.setState({
-      [event.target.name]: event.target.value
-    })
+      [event.target.name]: event.target.value,
+    });
   }
 
   render() {
-    const { user } = this.props
-    const { pending, error, data } = user
-    if(data.auth_token || localStorage.getItem('__token__')){
-      return <Redirect to='/categories' />
+    const { user } = this.props;
+    const { pending, error, data } = user;
+    const { email, password } = this.state;
+    if (data.auth_token || localStorage.getItem('__token__')) {
+      return <Redirect to="/categories" />;
     }
-    
-    if(!(data.auth_token || localStorage.getItem('__token__'))){
+
+    if (!(data.auth_token || localStorage.getItem('__token__'))) {
       return (
         <div className="vh-100 d-flex flex-column align-items-center justify-content-center">
-          <div 
-            className={`alert alert-danger ${error ? "d-block":"d-none"}`}
+          <div
+            className={`alert alert-danger ${error ? 'd-block' : 'd-none'}`}
             role="alert"
           >
-            {error ? error : ''}
+            {error || ''}
           </div>
           <div className="d-flex justify-content-center">
             <h1 className="h3 py-3">Login to readouts</h1>
           </div>
-          <form 
-            className="d-flex flex-column justify-content-center align-items-center" 
+          <form
+            className="d-flex flex-column justify-content-center align-items-center"
             onSubmit={this.handleSubmit}
           >
             <div className="form-group col-sm-12">
@@ -88,38 +88,40 @@ export class LoginForm extends React.Component {
                 type="email"
                 name="email"
                 placeholder="Email"
-                value={this.state.email}
+                value={email}
                 onChange={this.handleChange}
                 required
               />
             </div>
-  
+
             <div className="form-group col-sm-12">
               <input
                 className="form-control"
                 type="password"
                 name="password"
                 placeholder="Password"
-                value={this.state.password}
+                value={password}
                 onChange={this.handleChange}
                 required
               />
             </div>
-  
+
             <div className="form-group d-flex flex-column justify-content-center">
               <div className="mx-auto">
                 <button type="submit" className="btn btn-primary">Sign In</button>
               </div>
               <div className="text-muted">
-                <span className="small">Don't have an account?</span> <Link to='/signup' className="small">Register here.</Link>
+                <span className="small">Don&#39;t have an account?</span>
+                {' '}
+                <Link to="/signup" className="small">Register here.</Link>
+              </div>
             </div>
-            </div>
-            
+
           </form>
         </div>
-      )
+      );
     }
-    if(pending){
+    if (pending) {
       return (
         <div className="vh-100 d-flex align-items-center justify-content-center">
           <Button variant="primary" disabled>
@@ -133,9 +135,24 @@ export class LoginForm extends React.Component {
             Loading...
           </Button>
         </div>
-      )
+      );
     }
+
+    return <div />;
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
+LoginForm.defaultProps = {
+  user: {},
+};
+
+LoginForm.propTypes = {
+  user: PropTypes.shape({
+    data: PropTypes.objectOf(PropTypes.object),
+    pending: PropTypes.bool,
+    error: PropTypes.string,
+  }),
+  signoutUser: PropTypes.func.isRequired,
+  signinUser: PropTypes.func.isRequired,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

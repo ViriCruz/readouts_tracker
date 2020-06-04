@@ -1,127 +1,147 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getCategory } from '../reducers/categoryReducer';
-import TrackReading from '../components/trackReading'
-import Reading from '../api/createReading';
-import TotalTime from  '../api/fetchTotalTime';
-import { getReadings, getReadingsError, getReadingsPending } from '../reducers/readingReducer'
-import { getTotalTime, getTotalTimeError, getTotalTimePending } from '../reducers/totalTimeReducer'
 import { Redirect } from 'react-router';
+import PropTypes from 'prop-types';
+import { getCategory } from '../reducers/categoryReducer';
+import TrackReading from '../components/trackReading';
+import Reading from '../api/createReading';
+import TotalTime from '../api/fetchTotalTime';
+import { getReadings, getReadingsError, getReadingsPending } from '../reducers/readingReducer';
+import { getTotalTime, getTotalTimeError, getTotalTimePending } from '../reducers/totalTimeReducer';
 
 const mapStateToProps = state => (
   {
-  category: getCategory(state.category),
-  readings: {
-    pending: getReadingsPending(state.readings),
-    data: getReadings(state.readings),
-    error: getReadingsError(state.readings)
-  },
-  totalTime: {
-    pending: getTotalTimePending(state.totalTime),
-    data: getTotalTime(state.totalTime),
-    error: getTotalTimeError(state.totalTime)
-  }
-})
+    category: getCategory(state.category),
+    readings: {
+      pending: getReadingsPending(state.readings),
+      data: getReadings(state.readings),
+      error: getReadingsError(state.readings),
+    },
+    totalTime: {
+      pending: getTotalTimePending(state.totalTime),
+      data: getTotalTime(state.totalTime),
+      error: getTotalTimeError(state.totalTime),
+    },
+  });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   pushReading: Reading.pushReading,
-  totalReadingTime: TotalTime.fetchTotalTime
-}, dispatch)
+  totalReadingTime: TotalTime.fetchTotalTime,
+}, dispatch);
 
 export class ReadingContainer extends React.Component {
-
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       description: '',
       hours: 0,
       minutes: 0,
       operation: '',
-      buttonClicked: ''
-    }
+    };
 
-    this.handleSave = this.handleSave.bind(this)
-    this.setDescription = this.setDescription.bind(this)
-    this.setDuration = this.setDuration.bind(this)
+    this.handleSave = this.handleSave.bind(this);
+    this.setDescription = this.setDescription.bind(this);
+    this.setDuration = this.setDuration.bind(this);
   }
 
   componentDidUpdate(prevProps) {
-    const { category, totalReadingTime } = this.props
-    const { hours, minutes } = this.props.readings.data
+    const { category, totalReadingTime, readings } = this.props;
+    const { data } = readings;
+    const { hours, minutes } = data;
     const today = new Date();
-    const day = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    const token = localStorage.getItem('__token__')
+    const day = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+    const token = localStorage.getItem('__token__');
 
-    if((prevProps.readings.data.hours !== hours) || (prevProps.readings.data.minutes !== minutes )){
-      totalReadingTime(token, category.id, day)
+    if (
+      (prevProps.readings.data.hours !== hours)
+      || (prevProps.readings.data.minutes !== minutes)) {
+      totalReadingTime(token, category.id, day);
     }
   }
-  
 
-  setDuration(hours, minutes, event){
-    const { preventDefault, target } = event
+
+  setDuration(hours, minutes, event) {
+    const { preventDefault, target } = event;
     this.setState({
-      hours: hours,
-      minutes: minutes
+      hours,
+      minutes,
     }, () => {
-      this.handleSave({target, preventDefault})
-    })
+      this.handleSave({ target, preventDefault });
+    });
   }
 
-  setDescription(desc){
+  setDescription(desc) {
     this.setState({
-      description: desc
-    })
+      description: desc,
+    });
   }
 
-  handleSave(event){
-    const { category, pushReading, readings } = this.props
+  handleSave(event) {
+    const { category, pushReading, readings } = this.props;
     const today = new Date();
-    const day = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    const { description, hours, minutes } = this.state
-    const token = localStorage.getItem('__token__')
-    
-    if (event.target.textContent === 'Save'){
-      pushReading(category.id, token,{ description, hours, minutes, day }, 'save' )
+    const day = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+    const { description, hours, minutes } = this.state;
+    const token = localStorage.getItem('__token__');
+
+    if (event.target.textContent === 'Save') {
+      pushReading(category.id, token, {
+        description, hours, minutes, day,
+      }, 'save');
       this.setState({
         operation: 'Saved!',
-        buttonClicked: 'Save'
-      })
-    }else {
-      const { id } = readings.data
-      pushReading(category.id, token, { description, hours, minutes, day }, 'edit' , id)
+      });
+    } else {
+      const { id } = readings.data;
+      pushReading(category.id, token, {
+        description, hours, minutes, day,
+      }, 'edit', id);
       this.setState({
         operation: 'Edited!',
-        buttonClicked: event.target.textContent
-      })
+      });
     }
- 
-    event.preventDefault()
+
+    event.preventDefault();
   }
 
   render() {
-    const { description, operation } = this.state
-    const { category } = this.props
-    const { data } = this.props.readings
-    if(!category) return <Redirect to='/categories' />
-    
-    return(
+    const { description, operation } = this.state;
+    const { category, readings } = this.props;
+    const { data } = readings;
+    if (!category) return <Redirect to="/categories" />;
+
+    return (
       <div>
-        <TrackReading 
-          handleSave={this.handleSave}  
-          setDescription={this.setDescription} 
+        <TrackReading
+          handleSave={this.handleSave}
+          setDescription={this.setDescription}
           duration={this.setDuration}
           value={description}
         />
-        <div 
-          className={'id' in data ? 'alert alert-success d-block' : 'd-none'}>
+        <div
+          className={'id' in data ? 'alert alert-success d-block' : 'd-none'}
+        >
           {operation}
-        </div> 
-        
+        </div>
+
       </div>
-    )
+    );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReadingContainer)
+ReadingContainer.defaultProps = {
+  category: {},
+  readings: {},
+};
+
+ReadingContainer.propTypes = {
+  category: PropTypes.objectOf(PropTypes.any),
+  readings: PropTypes.shape({
+    data: PropTypes.objectOf(PropTypes.any),
+    pending: PropTypes.bool,
+    error: PropTypes.string,
+  }),
+  totalReadingTime: PropTypes.func.isRequired,
+  pushReading: PropTypes.func.isRequired,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ReadingContainer);

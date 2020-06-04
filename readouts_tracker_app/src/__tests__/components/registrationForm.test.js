@@ -5,57 +5,56 @@ import { RegistrationForm } from '../../containers/registrationForm';
 
 describe('Registration form tests', () => {
   const mockRegister = jest.fn();
- 
+
   let user = {
     error: null,
     pending: true,
-    data: {}
-  }
-  
-  let wrapper
+    data: {},
+  };
+
+  let wrapper;
   beforeEach(() => {
     wrapper = mount(
       <Router>
-        <RegistrationForm 
-          user={user} 
+        <RegistrationForm
+          user={user}
           register={mockRegister}
-          />
-      </Router>
-    )
-  })
+        />
+      </Router>,
+    );
+  });
 
   it('should render form', () => {
-    expect(wrapper.find('h1').text()).toBe('Sign Up Form')
-    expect(wrapper.find('input.form-control')).toHaveLength(5)
-    expect(wrapper.find('button.btn').text()).toBe('Register')
-  })
+    expect(wrapper.find('h1').text()).toBe('Sign Up Form');
+    expect(wrapper.find('input.form-control')).toHaveLength(5);
+    expect(wrapper.find('button.btn').text()).toBe('Register');
+  });
 
   it('calls onChange when onChange triggers on first input', () => {
-    const input = wrapper.find('input').at(0)
+    const input = wrapper.find('input').at(0);
     input.simulate('change', {
       target: {
         name: 'firstName',
-        value: 'john'
-      }
-    })
-    expect(input.instance().value).toBe('john')
-  })
+        value: 'john',
+      },
+    });
+    expect(input.instance().value).toBe('john');
+  });
 
   it('redirect', () => {
     user = {
       data: {
-        auth_token: 'faketoken'
-      }
-    }
+        auth_token: 'faketoken',
+      },
+    };
     wrapper = mount(
       <Router>
-        <RegistrationForm 
-          user={user} 
+        <RegistrationForm
+          user={user}
           register={mockRegister}
-          />
-      </Router>
-    )
-    expect(wrapper.find('Redirect')).toHaveLength(1)
-  })
-
-})
+        />
+      </Router>,
+    );
+    expect(wrapper.find('Redirect')).toHaveLength(1);
+  });
+});

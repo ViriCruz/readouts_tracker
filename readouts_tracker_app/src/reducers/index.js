@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { usersReducer } from './userReducer';
-import { measurementsReducer } from './measurementReducer'
-import { readingsReducer } from './readingReducer'
-import { categoriesReducer } from './categoriesReducer'
-import { categoryReducer } from './categoryReducer'
+import { measurementsReducer } from './measurementReducer';
+import { readingsReducer } from './readingReducer';
+import { categoriesReducer } from './categoriesReducer';
+import { categoryReducer } from './categoryReducer';
 import { totalTimeReducer } from './totalTimeReducer';
 
 const rootReducer = combineReducers({
@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   readings: readingsReducer,
   measurements: measurementsReducer,
   totalTime: totalTimeReducer,
-  category: categoryReducer
+  category: categoryReducer,
 });
 
 export default rootReducer;
