@@ -22,7 +22,7 @@ export class Navbar extends React.Component{
     const { data } = this.props.user
     const auth_token = localStorage.getItem('__token__')
     return(
-      <nav className="navbar">
+      <nav className="navbar p-0">
         { data.auth_token || auth_token ? <SignOutLinks handleLogout={this.handleLogout} /> : <SignInLinks /> }
       </nav>
     )

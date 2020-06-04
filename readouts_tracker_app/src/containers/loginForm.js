@@ -76,7 +76,7 @@ export class LoginForm extends React.Component {
             {error ? error : ''}
           </div>
           <div className="d-flex justify-content-center">
-            <h1 className="h3">Login to readouts</h1>
+            <h1 className="h3 py-3">Login to readouts</h1>
           </div>
           <form 
             className="d-flex flex-column justify-content-center align-items-center" 

@@ -67,7 +67,7 @@ export class RegistrationForm extends React.Component {
     return (
       <div className="vh-100 d-flex flex-column align-items-center justify-content-center">
         <div className="d-flex justify-content-center">
-          <h1 className="h3">Sign Up Form</h1>
+          <h1 className="h3 py-3">Sign Up Form</h1>
         </div>
         <form 
           className="d-flex flex-column justify-content-center align-items-center" 

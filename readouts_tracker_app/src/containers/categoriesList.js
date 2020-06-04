@@ -9,6 +9,11 @@ import { Redirect } from 'react-router-dom'
 import { getCategories, getCategoriesPending, getCategoriesError } from '../reducers/categoriesReducer';
 import { getCategory } from '../reducers/categoryReducer'
 import Spinner from 'react-bootstrap/Spinner';
+import book from '../assets/images/book.png'
+import audiobook from '../assets/images/audiobook.png'
+import manga from '../assets/images/manga.jpg'
+import article from '../assets/images/article.png'
+import comic from '../assets/images/comic.png'
 
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -60,6 +65,13 @@ export class Categories extends React.Component {
     const { data, pending, error } = categories
     const { redirect } = this.state
     const localToken = localStorage.getItem('__token__')
+    const images = {
+      books: book,
+      audiobooks: audiobook,
+      articles: article,
+      mangas: manga,
+      comics: comic           
+    }
 
     // check if user is logged in
     if(localToken === null){
@@ -69,7 +81,7 @@ export class Categories extends React.Component {
     
     if (pending){
       return (
-        <div className="d-flex justify-content-center flex-column">
+        <div className="vh-100 d-flex justify-content-center align-items-center">
           <Spinner animation="grow" />
         </div>
       )
@@ -77,16 +89,20 @@ export class Categories extends React.Component {
 
     if('categories' in data){
       return(
-        <div className="vh-100">
-          <h1 className="text-center">Select a category to measure</h1>
-          {
-            data.categories.map( cat => <Category key={cat.name} name={cat.name} onClick={this.handleClick} />)
-          }
+        <div className="vh-100 content">
+          <div className="title-container mr-4 my-3 rounded-right">
+            <h1 className="text-center h6 text-white text-uppercase py-2">Select a category to measure</h1>
+          </div>
+          <div className="d-flex flex-wrap">
+            {
+              data.categories.map( cat => <Category key={cat.name} image={images[cat.name]} name={cat.name} onClick={this.handleClick} />)
+            }
+          </div>
         </div>
       )
     }else {
       return (
-        <div className="d-flex justify-content-center flex-column">
+        <div className="vh-100 d-flex justify-content-center align-items-center">
           <Spinner animation="grow" />
         </div>
       )

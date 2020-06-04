@@ -69,7 +69,7 @@ export class Measure extends React.Component {
     if(data.length > 0){
       return (
         <div className="d-flex flex-column justify-content-center align-items-center">
-          <div className="mt-3">
+          <div className="mt-3 date">
             <Moment format="D MMM YYYY" withTitle>{data.day}</Moment>
           </div>
           
@@ -92,15 +92,16 @@ export class Measure extends React.Component {
               }
             </Pie>
           </PieChart>
-          <div className="align-self-start">
+          <div className="align-self-between">
             <ul>
               {
                 categories.map(cat => {
                   return <li 
-                    style={{backgroundColor: cat.fill, width:"20px", height:"20px", paddingLeft:"20px"}}
+                    className="d-flex"
                     key={cat.fill}
                     >
-                    <span className="ml-2">{cat.name}</span>
+                    <span style={{ backgroundColor: cat.fill, width:"20px", height:"20px", display: 'inline-block' }}></span>
+                    <span className="ml-2 cat-name">{cat.name}</span>
                     </li>
                 }) 
               }
@@ -115,7 +116,7 @@ export class Measure extends React.Component {
       return(
         <div className="d-flex flex-column justify-content-center align-items-center">
           <p>You haven't read nothing today.</p>
-          <p>Start measure <Link to="/categories">something</Link></p>
+          <p>Start measure <Link to="/categories">a reading.</Link></p>
         </div>
       )
     }

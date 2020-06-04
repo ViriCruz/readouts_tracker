@@ -5,9 +5,9 @@ import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers/index';
 import App from './components/app'
-import './styles/reset.css';
+import './assets/styles/reset.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles/custom.css'
+import './assets/styles/custom.css'
 
 const middlewares = [thunk];
 
