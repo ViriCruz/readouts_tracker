@@ -6,7 +6,7 @@
 [![MIT License][license-shield]][license-url]
 
 # Tracking mobile web app with react
-This project is a tracking app to measure how much do you read during a day. Taking in count only: books, articles, audiobooks, mangas and comics.
+This project is a tracking app to measure how much do you read during a day. Taking in count only: books, articles, audiobooks, mangas, and comics.
 This is a manual tracking to acquire the habit of reading.
 
 
@@ -40,11 +40,19 @@ This will launch project on **localhost:3000**
 ### How to use
 
 #### Login page
-#### SignUp page
-#### Categories page
-#### Track Reading page
-#### Measurements page
+If you already registered, you only need to type your email and password to sign in.
 
+#### SignUp page
+To signup, you need to fill a form with your first name, last name, email, and password. After this, you will be redirected to the main page.
+
+#### Categories page
+You will see a list of categories here, you only need to click or tap on one to select it. You will be redirected to the track reading section.
+
+#### Track Reading page
+Here you can start your manual tracking. You write a description of what you are reading, click or tap start to measure. Don't forget to save first before you edit or stop the time.
+
+#### Measurements page
+Here you can see what do you read more during a day. Showing a pie chart to represent the percentage of the categories that you read.
 
 
 ## How to contribute and partipate
@@ -74,13 +82,13 @@ This project is [MIT](LICENSE) licensed.
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/viricruz/basic-catalogue-react.svg?style=flat-square
-[contributors-url]: https://github.com/viricruz/basic-catalogue-react/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/viricruz/basic-catalogue-react
-[forks-url]: https://github.com/viricruz/basic-catalogue-react/network/members
-[stars-shield]: https://img.shields.io/github/stars/viricruz/basic-catalogue-react
-[stars-url]: https://github.com/viricruz/basic-catalogue-react/stargazers
-[issues-shield]: https://img.shields.io/github/issues/viricruz/basic-catalogue-react
-[issues-url]: https://github.com/viricruz/basic-catalogue-react/issues
-[license-shield]: https://img.shields.io/github/license/viricruz/basic-catalogue-react
-[license-url]: https://github.com/viricruz/basic-catalogue-react/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/viricruz/readouts_tracker.svg?style=flat-square
+[contributors-url]: https://github.com/viricruz/readouts_tracker/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/viricruz/readouts_tracker
+[forks-url]: https://github.com/viricruz/readouts_tracker/network/members
+[stars-shield]: https://img.shields.io/github/stars/viricruz/readouts_tracker
+[stars-url]: https://github.com/viricruz/readouts_tracker/stargazers
+[issues-shield]: https://img.shields.io/github/issues/viricruz/readouts_tracker
+[issues-url]: https://github.com/viricruz/readouts_tracker/issues
+[license-shield]: https://img.shields.io/github/license/viricruz/readouts_tracker
+[license-url]: https://github.com/viricruz/readouts_tracker/blob/master/LICENSE.txt
