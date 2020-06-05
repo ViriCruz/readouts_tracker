@@ -37,7 +37,7 @@ RSpec.describe 'Readings API' do
   end
 
   describe 'GET /api/v1/categories/:category_id/readings/total_time/:day' do
-    before { get "/api/v1/categories/#{category_id}/readings/total_time/2020-05-29", params: {}, headers: headers }
+    before { get "/api/v1/categories/#{category_id}/readings/total_time/#{Faker::Date.between(from: 1.days.ago, to: Date.today)}", params: {}, headers: headers }
 
     context 'when category exists' do
       it 'returns status code 200' do
