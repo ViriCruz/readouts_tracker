@@ -7,7 +7,7 @@ describe('Measurements tests', () => {
   let measurements = {
     error: null,
     pending: true,
-    data: [{}],
+    data: [],
   };
 
   const mockFetchMeasurements = jest.fn();

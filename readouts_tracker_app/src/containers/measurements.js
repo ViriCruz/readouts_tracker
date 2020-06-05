@@ -134,12 +134,22 @@ renderCustomizedLabel.propTypes = {
 
 Measure.defaultProps = {
   measurements: {
-    data: []
+    data: [],
+    pending: true,
+    error: null
   },
 };
 
 Measure.propTypes = {
   fetchMeasurements: PropTypes.func.isRequired,
-  measurements: PropTypes.objectOf(PropTypes.object),
+  measurements: PropTypes.shape({
+    data: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string,
+      day: PropTypes.string,
+      value: PropTypes.number
+    })),
+    error: PropTypes.string,
+    pending: PropTypes.bool
+  }),
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Measure);
