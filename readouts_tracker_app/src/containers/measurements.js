@@ -133,13 +133,13 @@ renderCustomizedLabel.propTypes = {
 };
 
 Measure.defaultProps = {
-  measurements: {},
+  measurements: {
+    data: []
+  },
 };
 
 Measure.propTypes = {
   fetchMeasurements: PropTypes.func.isRequired,
-  measurements: PropTypes.shape({
-    data: PropTypes.arrayOf(PropTypes.string),
-  }),
+  measurements: PropTypes.objectOf(PropTypes.object),
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Measure);

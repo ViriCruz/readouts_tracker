@@ -7,7 +7,7 @@ describe('Measurements tests', () => {
   let measurements = {
     error: null,
     pending: true,
-    data: {},
+    data: [{}],
   };
 
   const mockFetchMeasurements = jest.fn();
@@ -21,6 +21,12 @@ describe('Measurements tests', () => {
         />
       </Router>,
     );
+    Object.defineProperty(window, 'localStorage', {
+      value: {
+        getItem: jest.fn(() => ({ __token__: '' })),
+      },
+      writable: true,
+    });
   });
 
   it('should call fetchMeasurements on componentDidMount', () => {

@@ -16,7 +16,7 @@ describe('Navbar test', () => {
       <Router>
         <Navbar
           user={user}
-          signout_user={mockSignOut}
+          signoutUser={mockSignOut}
         />
       </Router>,
     );
@@ -43,10 +43,10 @@ describe('Navbar test', () => {
       <Router>
         <Navbar
           user={user}
-          signout_user={mockSignOut}
+          signoutUser={mockSignOut}
         />
       </Router>,
     );
-    expect(wrapper.find({ href: '#' }).text()).toBe('Logout');
+    expect(wrapper.find('div.text-white').text()).toBe('Logout');
   });
 });

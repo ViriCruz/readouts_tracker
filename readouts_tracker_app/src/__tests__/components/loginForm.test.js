@@ -18,8 +18,8 @@ describe('Login form tests', () => {
       <Router>
         <LoginForm
           user={user}
-          signin_user={mockSignIn}
-          signout_user={mockSignOut}
+          signinUser={mockSignIn}
+          signoutUser={mockSignOut}
         />
       </Router>,
     );
@@ -48,8 +48,8 @@ describe('Login form tests', () => {
       <Router>
         <LoginForm
           user={user}
-          signin_user={mockSignIn}
-          signout_user={mockSignOut}
+          signinUser={mockSignIn}
+          signoutUser={mockSignOut}
         />
       </Router>,
     );
@@ -62,8 +62,8 @@ describe('Login form tests', () => {
       <Router>
         <LoginForm
           user={user}
-          signin_user={mockSignIn}
-          signout_user={mockSignOut}
+          signinUser={mockSignIn}
+          signoutUser={mockSignOut}
         />
       </Router>,
     );

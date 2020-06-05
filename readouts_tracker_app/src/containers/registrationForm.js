@@ -155,7 +155,7 @@ RegistrationForm.defaultProps = {
 RegistrationForm.propTypes = {
   register: PropTypes.func.isRequired,
   user: PropTypes.shape({
-    data: PropTypes.objectOf(PropTypes.object),
+    data: PropTypes.objectOf(PropTypes.any),
     pending: PropTypes.bool,
     error: PropTypes.string,
   }),
