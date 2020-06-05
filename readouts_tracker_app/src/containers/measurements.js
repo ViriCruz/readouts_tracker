@@ -136,7 +136,7 @@ Measure.defaultProps = {
   measurements: {
     data: [],
     pending: true,
-    error: null
+    error: null,
   },
 };
 
@@ -146,10 +146,10 @@ Measure.propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string,
       day: PropTypes.string,
-      value: PropTypes.number
+      value: PropTypes.number,
     })),
     error: PropTypes.string,
-    pending: PropTypes.bool
+    pending: PropTypes.bool,
   }),
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Measure);
