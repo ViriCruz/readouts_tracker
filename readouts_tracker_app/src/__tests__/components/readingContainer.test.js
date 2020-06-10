@@ -118,7 +118,7 @@ describe('Reading container tests', () => {
         id: 1,
       },
     };
-    
+
     wrapper = mount(
       <Router>
         <ReadingContainer

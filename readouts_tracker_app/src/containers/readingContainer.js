@@ -38,7 +38,7 @@ export class ReadingContainer extends React.Component {
       hours: 0,
       minutes: 0,
       operation: '',
-      errors: ''
+      errors: '',
     };
 
     this.handleSave = this.handleSave.bind(this);
@@ -86,36 +86,34 @@ export class ReadingContainer extends React.Component {
     const token = localStorage.getItem('__token__');
 
     if (event.target.textContent === 'Save') {
-      if(category.id){
+      if (category.id) {
         pushReading(category.id, token, {
           description, hours, minutes, day,
         }, 'save');
         this.setState({
           operation: 'Saved!',
-          errors: ''
+          errors: '',
         });
       } else {
         this.setState({
-          errors: 'Go back to select a category.'
-        })
+          errors: 'Go back to select a category.',
+        });
       }
-      
     } else {
       const { id } = readings.data;
-      if(id && category.id){
+      if (id && category.id) {
         pushReading(category.id, token, {
           description, hours, minutes, day,
         }, 'edit', id);
         this.setState({
           operation: 'Edited!',
-          errors: ''
+          errors: '',
         });
-      }else {
+      } else {
         this.setState({
-          errors: 'Please save before edit.'
-        })
+          errors: 'Please save before edit.',
+        });
       }
-      
     }
 
     event.preventDefault();
@@ -136,12 +134,12 @@ export class ReadingContainer extends React.Component {
           value={description}
         />
         <div
-          className={ errors !== '' ? 'alert alert-danger d-block':'d-none'}
+          className={errors !== '' ? 'alert alert-danger d-block' : 'd-none'}
         >
           {errors}
         </div>
         <div
-          className={'id' in data ? 'alert alert-success d-block' : 'd-none'}
+          className={('id' in data && operation !== '') ? 'alert alert-success d-block' : 'd-none'}
         >
           {operation}
         </div>
