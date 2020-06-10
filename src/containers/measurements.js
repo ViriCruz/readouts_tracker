@@ -95,7 +95,8 @@ export class Measure extends React.Component {
                     className="d-flex"
                     key={cat.fill}
                   >
-                    <span style={{
+                    <span 
+                      style={{
                       backgroundColor: cat.fill, width: '20px', height: '20px', display: 'inline-block',
                     }}
                     />
