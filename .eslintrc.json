@@ -11,7 +11,7 @@
         "jsx": true
     }
   },
-  "extends": ["airbnb", "airbnb/hooks"],
+  "extends": ["airbnb"],
   "plugins": ["react"],
   "rules": {
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
