@@ -38,6 +38,7 @@ export class ReadingContainer extends React.Component {
       hours: 0,
       minutes: 0,
       operation: '',
+      errors: ''
     };
 
     this.handleSave = this.handleSave.bind(this);
@@ -85,27 +86,43 @@ export class ReadingContainer extends React.Component {
     const token = localStorage.getItem('__token__');
 
     if (event.target.textContent === 'Save') {
-      pushReading(category.id, token, {
-        description, hours, minutes, day,
-      }, 'save');
-      this.setState({
-        operation: 'Saved!',
-      });
+      if(category.id){
+        pushReading(category.id, token, {
+          description, hours, minutes, day,
+        }, 'save');
+        this.setState({
+          operation: 'Saved!',
+          errors: ''
+        });
+      } else {
+        this.setState({
+          errors: 'Go back to select a category.'
+        })
+      }
+      
     } else {
       const { id } = readings.data;
-      pushReading(category.id, token, {
-        description, hours, minutes, day,
-      }, 'edit', id);
-      this.setState({
-        operation: 'Edited!',
-      });
+      if(id && category.id){
+        pushReading(category.id, token, {
+          description, hours, minutes, day,
+        }, 'edit', id);
+        this.setState({
+          operation: 'Edited!',
+          errors: ''
+        });
+      }else {
+        this.setState({
+          errors: 'Please save before edit.'
+        })
+      }
+      
     }
 
     event.preventDefault();
   }
 
   render() {
-    const { description, operation } = this.state;
+    const { description, operation, errors } = this.state;
     const { category, readings } = this.props;
     const { data } = readings;
     if (!category) return <Redirect to="/categories" />;
@@ -118,6 +135,11 @@ export class ReadingContainer extends React.Component {
           duration={this.setDuration}
           value={description}
         />
+        <div
+          className={ errors !== '' ? 'alert alert-danger d-block':'d-none'}
+        >
+          {errors}
+        </div>
         <div
           className={'id' in data ? 'alert alert-success d-block' : 'd-none'}
         >

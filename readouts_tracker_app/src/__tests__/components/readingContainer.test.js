@@ -59,7 +59,7 @@ describe('Reading container tests', () => {
 
   it('should call pushReading when save button clicked', () => {
     category = {
-      id: '',
+      id: 1,
     };
     wrapper = mount(
       <Router>
@@ -79,8 +79,17 @@ describe('Reading container tests', () => {
 
   it('should call pushReading when edit button clicked', () => {
     category = {
-      id: '',
+      id: 1,
     };
+
+    const readings = {
+      error: null,
+      pending: true,
+      data: {
+        id: 1,
+      },
+    };
+
     wrapper = mount(
       <Router>
         <ReadingContainer
@@ -99,8 +108,17 @@ describe('Reading container tests', () => {
 
   it('should call pushReading when stop button clicked', () => {
     category = {
-      id: '',
+      id: 1,
     };
+
+    const readings = {
+      error: null,
+      pending: true,
+      data: {
+        id: 1,
+      },
+    };
+    
     wrapper = mount(
       <Router>
         <ReadingContainer
