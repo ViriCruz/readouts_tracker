@@ -131,9 +131,14 @@ describe('Reading container tests', () => {
       </Router>,
     );
 
-    const button = wrapper.find({ name: 'stop' });
-    button.simulate('click');
+    const button = wrapper.find({ name: 'triggerTime' });
 
-    expect(mockPushReading).toHaveBeenCalled();
+    button.simulate('click', {
+      target: {
+        textContent: 'Stop',
+      },
+    });
+
+    expect(mockPushReading).toBeCalledTimes(3);
   });
 });
