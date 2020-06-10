@@ -10,9 +10,11 @@
     "bootstrap": "^4.4.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "jquery": "^3.5.1",
     "moment": "^2.26.0",
     "moment-timezone": "^0.5.31",
     "node-fetch": "^2.6.0",
+    "popper.js": "^1.16.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
@@ -24,7 +26,8 @@
     "react-scripts": "3.4.1",
     "recharts": "^1.8.5",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "typescript": "^3.9.5"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.9.6",
