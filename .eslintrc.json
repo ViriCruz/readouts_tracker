@@ -8,7 +8,8 @@
       "ecmaFeatures": {
           "jsx": true,
           "modules": true
-      }
+      },
+      "ecmaVersion": 2018
     },
     "extends": ["airbnb", "plugin:react/recommended"],
     "plugins": ["react"],
