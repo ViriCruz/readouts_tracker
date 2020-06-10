@@ -1,0 +1,22 @@
+# add the linters you want stickler to use for this project
+linters:
+  rubocop:
+    display_cop_names: true
+    # indicate where is the config file for stylelint
+    config: './rubocop.yml'
+  eslint:
+    # indicate where is the config file for stylelint
+    config: './.eslintrc.json'  
+
+# add the files here you want to be ignored by stylelint
+files:
+  ignore:
+    - "**/db/*"
+    - "**/bin/*" 
+    - "**/config/*"
+    - "**/Guardfile"
+    - "**/Rakefile"
+    - "**/README.md"
+    - "**/node_modules/**/*"
+    - "**/Gemfile"
+    - "**/Gemfile.lock"

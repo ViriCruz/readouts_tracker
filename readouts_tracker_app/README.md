@@ -19,10 +19,22 @@ Visit [Readouts tracker](https://readouts-tracker.herokuapp.com/ ) to try the li
 - react-router-dom 5.1
 - create-react-app
 - JavaScript ES6
-- Ruby on Rails
+
+
+## Prerequisites
+* Node.js installed
+You will need Node.js up to v8
 
 * System dependencies
 Windows/ Mac
+
+
+## How to Install locally
+Clone project and run
+`npm install`
+`npm start`
+
+This will launch project on **localhost:3000**
 
 
 ### How to use
@@ -45,6 +57,13 @@ Here you can see what do you read more during a day. Showing a pie chart to repr
 
 ## How to contribute and partipate
 Fork this repo and submit a PR for review and potential merge to main branch. Feel free to leave feedback :smile:
+
+## How to run tests
+If you want to use npm, run:
+`npm test`
+
+If you want to use yarn, run:
+`yarn test`
 
 ## Authors
 
