@@ -9,8 +9,6 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 
-
-
 const middlewares = [thunk];
 
 const initialState = {
