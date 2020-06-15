@@ -25,10 +25,10 @@ const fetchMeasurements = (token, day) => async dispatch => {
 
     const load = await response;
     const json = await load.json();
-    let cat = '';
+    let cat = [];
     const output = json.data.measurements.map(m => {
-      if (m.category !== cat) {
-        cat = m.category;
+      if (!cat.includes(m.category)) {
+        cat.push(m.category);
         return m;
       }
       return null;

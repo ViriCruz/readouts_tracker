@@ -25,7 +25,7 @@ const TrackReading = ({
             onChange={handleChange}
           />
           <div className="form-group mt-4">
-            <button type="button" onClick={e => handleSave(e)} name="save" className="btn btn-primary px-3 mr-2">Save</button>
+            <button type="button" onClick={handleSave} name="save" className="btn btn-primary px-3 mr-2">Save</button>
             <button type="button" onClick={handleSave} name="edit" className="btn btn-dark px-3">Edit</button>
           </div>
         </div>

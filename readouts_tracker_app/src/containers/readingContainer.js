@@ -84,7 +84,6 @@ export class ReadingContainer extends React.Component {
     const day = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
     const { description, hours, minutes } = this.state;
     const token = localStorage.getItem('__token__');
-
     if (event.target.textContent === 'Save') {
       if (category.id) {
         pushReading(category.id, token, {
