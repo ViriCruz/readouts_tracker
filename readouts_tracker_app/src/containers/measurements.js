@@ -143,14 +143,9 @@ Measure.defaultProps = {
 
 Measure.propTypes = {
   fetchMeasurements: PropTypes.func.isRequired,
-  measurements: PropTypes.shape({
-    data: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string,
-      day: PropTypes.string,
-      value: PropTypes.number,
-    })),
-    error: PropTypes.string,
-    pending: PropTypes.bool,
-  }),
+  measurements: PropTypes.objectOf(
+    PropTypes.any,
+  ),
+
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Measure);
