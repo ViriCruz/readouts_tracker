@@ -50,15 +50,17 @@ export class Categories extends React.Component {
     fetchCategories(localStorage.getItem('__token__') || authToken);
   }
 
-  handleClick(event) {
-    event.preventDefault();
+  handleClick(event, name) {
     const { categories, assignCategory } = this.props;
     const { data } = categories;
-    const category = data.categories.filter(cat => cat.name === event.target.textContent);
-    assignCategory(category[0]);
+    const category = data.categories.filter(cat => cat.name === name);
     this.setState({
       redirect: true,
+    }, () => {
+      assignCategory(category[0]);
     });
+
+    event.preventDefault();
   }
 
   render() {
