@@ -25,7 +25,7 @@ const fetchMeasurements = (token, day) => async dispatch => {
 
     const load = await response;
     const json = await load.json();
-    let cat = [];
+    const cat = [];
     const output = json.data.measurements.map(m => {
       if (!cat.includes(m.category)) {
         cat.push(m.category);
@@ -38,11 +38,7 @@ const fetchMeasurements = (token, day) => async dispatch => {
         ms[i] = {
           name: current.category,
           day: current.day,
-          value: parseFloat(
-            `${parseInt(current.total_time.slice(0, 2), 10)
-            }.${
-              parseInt(current.total_time.slice(3), 10)}`,
-          ),
+          value: parseFloat(current.total_time.replace(/:/, '.')),
         };
         return ms;
       }, []);

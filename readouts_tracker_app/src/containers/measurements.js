@@ -100,7 +100,7 @@ export class Measure extends React.Component {
                         backgroundColor: cat.fill, width: '20px', height: '20px', display: 'inline-block',
                       }}
                     />
-                    <span className="ml-2 cat-name">{cat.name}</span>
+                    <span className="ml-2 mb-2 cat-name">{cat.name}</span>
                   </li>
                 ))
               }

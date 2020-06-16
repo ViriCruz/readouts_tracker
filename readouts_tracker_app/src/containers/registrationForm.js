@@ -77,7 +77,7 @@ export class RegistrationForm extends React.Component {
           className="d-flex flex-column justify-content-center align-items-center"
           onSubmit={this.handleSubmit}
         >
-          <div className="form-group col-sm-12">
+          <div className="form-group">
             <input
               className="form-control"
               type="text"
@@ -88,7 +88,7 @@ export class RegistrationForm extends React.Component {
               required
             />
           </div>
-          <div className="form-group col-sm-12">
+          <div className="form-group">
             <input
               className="form-control"
               type="text"
@@ -100,7 +100,7 @@ export class RegistrationForm extends React.Component {
             />
           </div>
 
-          <div className="form-group col-sm-12">
+          <div className="form-group">
             <input
               className="form-control"
               type="email"
@@ -112,7 +112,7 @@ export class RegistrationForm extends React.Component {
             />
           </div>
 
-          <div className="form-group col-sm-12">
+          <div className="form-group">
             <input
               className="form-control"
               type="password"
@@ -124,7 +124,7 @@ export class RegistrationForm extends React.Component {
             />
           </div>
 
-          <div className="form-group col-sm-12">
+          <div className="form-group">
             <input
               className="form-control"
               type="password"
