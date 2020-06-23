@@ -52,6 +52,14 @@ Here you can start your manual tracking. You write a description of what you are
 Here you can see what do you read more during a day. Showing a pie chart to represent the percentage of the categories that you read.
 
 
+
+## Potential future features
+- Display weekly statistics.
+- Display in which hours you read the most.
+
+## How to run automated tests
+You will find a README.md file inside each folder which contains specific instructions on how to do it.
+
 ## How to contribute and participate
 Fork this repo and submit a PR for review and potential merge to the main branch. Feel free to leave feedback. :smile:
 
@@ -63,7 +71,7 @@ Fork this repo and submit a PR for review and potential merge to the main branch
 
 - email me at viridiana.cruz.olivera@gmail.com
 
-- Linkedin [@viricruz](https://www.linkedin.com/in/viricruz/)
+- LinkedIn [@viricruz](https://www.linkedin.com/in/viricruz/)
 
 ## License
 
