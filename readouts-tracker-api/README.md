@@ -1,6 +1,6 @@
 # API for readouts tracker app
 
-> This is part of the Final Project of Microverse, which consist in create an API on Ruby on Rails and a react app for the frontend.
+This is a REST API made in Ruby on Rails to manage categories, authentication, measurements, and the readings that the user tracks.
 
 ## Built With ✨
 
@@ -30,8 +30,8 @@ Clone project and run
 `bundle exec rspec`
 
 
-## How to contribute and partipate
-Fork this repo and submit a PR for review and potential merge to main branch
+## How to contribute and participate
+Fork this repo and submit a PR for review and potential merge to the main branch. Feel free to leave feedback. :smile:
 
 ## Authors
 
