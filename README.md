@@ -9,9 +9,13 @@
 This project is a tracking app to measure how much do you read during a day. Taking in count only: books, articles, audiobooks, mangas, and comics.
 This is a manual tracking to acquire the habit of reading.
 
+<img src="https://i.imgur.com/NGp1cjP.png" alt="categories" />
+<img src="https://i.imgur.com/PFbAbrh.png" alt="track" />
+<img src="https://i.imgur.com/UJn88b8.png" alt="chart" />
+
 
 ## Demo down below
-Visit [Readouts tracker](https://readouts-tracker.herokuapp.com/ ) to try the live version.
+Visit [Readouts tracker](https://readouts-tracker.herokuapp.com/) to try the live version.
 
 ## Built With ✨
 - React 16.13
@@ -21,8 +25,13 @@ Visit [Readouts tracker](https://readouts-tracker.herokuapp.com/ ) to try the li
 - JavaScript ES6
 - Ruby on Rails
 
+## Prerequisites
+* Node.js installed You will need Node.js up to v8
 * System dependencies
 Windows/ Mac
+
+**Prerequisites for the API**
+* Ruby on rails installed, see [https://rubyonrails.org/](https://rubyonrails.org/) for more information on how to install it.
 
 
 ### How to use
@@ -43,8 +52,8 @@ Here you can start your manual tracking. You write a description of what you are
 Here you can see what do you read more during a day. Showing a pie chart to represent the percentage of the categories that you read.
 
 
-## How to contribute and partipate
-Fork this repo and submit a PR for review and potential merge to main branch. Feel free to leave feedback :smile:
+## How to contribute and participate
+Fork this repo and submit a PR for review and potential merge to the main branch. Feel free to leave feedback. :smile:
 
 ## Authors
 
