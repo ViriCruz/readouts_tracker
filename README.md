@@ -6,7 +6,7 @@
 [![MIT License][license-shield]][license-url]
 
 # Tracking mobile web app with react
-This project is a tracking app to measure how much do you read during a day. Taking in count only: books, articles, audiobooks, mangas, and comics.
+This project is a tracking app to measure how much you read during a day. Taking in count only: books, articles, audiobooks, mangas, and comics.
 This is a manual tracking to acquire the habit of reading.
 
 <img src="https://i.imgur.com/NGp1cjP.png" alt="categories" />
